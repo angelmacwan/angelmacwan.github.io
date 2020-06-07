@@ -1,0 +1,64 @@
+[
+  {
+    "name":"Transfer Learning",
+    "tech":"ML5.JS, P5.JS",
+    "live":"https://angelmacwan.github.io/ML5/TRANSFER%20LEARNING/",
+    "git":"https://github.com/angelmacwan/ML5/tree/master/TRANSFER%20LEARNING",
+    "desc":"train a Machine Learning model with your own image data"
+  },{
+    "name":"Image Classification",
+    "tech":"ML5.js, POSENET, P5.JS",
+    "live":"https://angelmacwan.github.io/ML5/IMAGE%20CLASSIFICATION/",
+    "git":"https://github.com/angelmacwan/ML5/tree/master/IMAGE%20CLASSIFICATION",
+    "desc":"Classify Images using a pre trained poseNet model"
+  },
+  {
+    "name":"Epidemic Simulation",
+    "tech":"P5.JS, Chart.JS",
+    "live":"https://angelmacwan.github.io/P5.JS/EpidemicSimulation/",
+    "git":"https://github.com/angelmacwan/P5.JS/tree/master/EpidemicSimulation",
+    "desc":"Simple interactive Epidemic spread simulation with live graph"
+  },
+  {
+    "name":"Cube Wave",
+    "tech":"P5.js",
+    "live":"https://angelmacwan.github.io/P5.JS/CUBE%20WAVE/",
+    "git":"https://github.com/angelmacwan/P5.JS/tree/master/CUBE%20WAVE",
+    "desc":"Data Visulization of a wave function on a 3D Cube"
+  },
+  {
+    "name":"Live Chroma Key",
+    "tech":"P5.JS",
+    "live":"https://angelmacwan.github.io/P5.JS/PIXELS%20(KEYING)/",
+    "git":"https://github.com/angelmacwan/P5.JS/tree/master/PIXELS%20(KEYING)",
+    "desc":"Live Image Processing video keying (color removal, eg green/blue sceen)"
+  },
+  {
+    "name":"Speech Synthesis",
+    "tech":"JAVASCRIPT",
+    "live":"https://angelmacwan.github.io/P5.JS/SpeechSynthesis/Speech.html",
+    "git":"https://github.com/angelmacwan/P5.JS/tree/master/SpeechSynthesis",
+    "desc":"Text to speach using JS SPEECH API"
+  },
+  {
+    "name":"Weather App",
+    "tech":"JAVASCRIPT, Weather API",
+    "live":"https://angelmacwan.github.io/JavaScript/Weather%20App/index.HTML",
+    "git":"https://github.com/angelmacwan/JavaScript/tree/master/Weather%20App",
+    "desc":"Get current weather info for your location"
+  },
+  {
+    "name":"Tic Tac Toe Game",
+    "tech":"JAVASCRIPT",
+    "live":"https://angelmacwan.github.io/JavaScript/TicTacToe/sketch.html",
+    "git":"https://github.com/angelmacwan/JavaScript/tree/master/TicTacToe",
+    "desc":""
+  },
+  {
+    "name":"Food Reciep Search",
+    "tech":"JAVASCRIPT, food reciep API",
+    "live":"https://angelmacwan.github.io/JavaScript/FoodReciep/sketch.html",
+    "git":"https://github.com/angelmacwan/JavaScript/tree/master/FoodReciep",
+    "desc":"Find reciep for your fav food"
+  }
+]

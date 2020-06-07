@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <title>Angel Macwan</title>
+</head>
+
+<body>
+
+
+  <div id="progressBar">
+
+  </div>
+
+  <nav class="navMobile">
+    <button type="button" onclick="navToggle(true)">
+      <svg class="bi bi-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+      </svg>
+    </button>
+    <span>AM</span>
+  </nav>
+
+  <nav class="navBar">
+    <button type="button" onclick="navToggle(false)" class="navMobileClose">
+      <svg class="bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+      </svg>
+    </button>
+
+    <h1>AM</h1>
+
+    <a href="#home" class="activeNav">HOME</a>
+    <a href="#portfolio">MY WORK</a>
+    <a href="#skills">SKILLS</a>
+    <a href="#achieve">ACHIEVEMENTS</a>
+    <a href="#contact">SAY HI!</a>
+    <a href="./RESUME_ANGEL_MACWAN.pdf" target="_blank">RESUME</a>
+    <a href="http://github.com/angelmacwan/" target="_blank">GITHUB</a>
+  </nav>
+
+  <div class="content">
+
+
+    <div id="home">
+      <span class="animate__animated animate__backInUp">
+        <p>&lt HELLO WORLD / &gt</p>
+        <p>I am Angel Macwan</p>
+        <p>DEVELOPER // DESIGNER </p>
+        <p>How can i help you!</p>
+      </span>
+
+      <img src="./me.jpg" alt="" class="animate__animated animate__backInDown">
+    </div>
+
+
+
+    <div id="portfolio">
+      <h1 class="sectionHead">MY WORK</h1>
+      <hr class="titleUnder">
+
+      <div class="portfolio-grid">
+        <div class="card">
+          <!--  -->
+          <!--  -->
+          <img src="./portfolio/taskmanager.png" alt="PORTFOLIO" class="card-image" style="width:100%">
+          <div class="card-middle">
+            <div class="card-text">
+              <h1>Task Manager</h1>
+              <p>NODE, REACT, NeDB, EXPRESS</p>
+              <p class="info">Full stack app made for a hackathon</p>
+              <br>
+              <p class="info">Create users, login, add tasks, manage task sates (Incomplete, Ongoing, Complete)</p>
+              <p class="info">Add tasks with diffrent labels to organze them</p>
+              <br>
+              <a href="https://agile-fortress-88290.herokuapp.com/" target="_blank" class="btn-live">View Live</a>
+              <a href="https://github.com/angelmacwan/TaskManager" target="_blank" class="btn-code">Code</a>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="card">
+          <img src="./portfolio/poseNet.png" alt="PORTFOLIO" class="card-image" style="width:100%">
+          <div class="card-middle">
+            <div class="card-text">
+              <h1>PoseNet Body Tracking</h1>
+              <p>ML5.JS, POSENET, P5.JS</p>
+              <p class="info">Body pose estimation using POSENET model, visulized using P5.JS</p>
+              <br>
+              <a href="https://angelmacwan.github.io/ML5/POSENET/sketch.html" target="_blank" class="btn-live">View Live</a>
+              <a href="https://github.com/angelmacwan/ML5/tree/master/POSENET" target="_blank" class="btn-code">Code</a>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="card">
+          <img src="./portfolio/yolo.png" alt="PORTFOLIO" class="card-image" style="width:100%">
+          <div class="card-middle">
+            <div class="card-text">
+              <h1>YOLO Object detection</h1>
+              <p>ML5.JS, P5.JS, YOLO</p>
+              <p class="info">YOLO(You only look once) is a Machine Learning model for object deection and classification</p>
+              <br>
+              <a href="https://angelmacwan.github.io/ML5/YOLO%20DETECTION/INDEX.HTML" target="_blank" class="btn-live">View Live</a>
+              <a href="https://github.com/angelmacwan/ML5/tree/master/YOLO%20DETECTION" target="_blank" class="btn-code">Code</a>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <!--  -->
+
+        <div id="allProjects" class="animate__animated animate__bounceOutUp">
+          <!-- <div>
+            <h2>PROJECT TITLE</h2>
+            <p id=" pTech">JS , NODE, PYTHON</p>
+            <p id="pDesc">DESC</p>
+            <br>
+            <a href="#">LIVE</a>
+            <a href="#">CODE</a>
+          </div> -->
+        </div>
+
+      </div>
+      <center>
+        <button id="btnShowAll" class="btn-dark-outline" type="button" onclick="showAllProjects()">See all projects</button>
+      </center>
+
+    </div>
+
+
+    <div id="skills">
+      <h1 class="sectionHead">SKILLS</h1>
+      <hr class="titleUnder">
+      <div class="gridView">
+        <div>
+          <h2>LANGAUGES</h2>
+          <p>JAVASCRIPT</p>
+          <p>PYTHON</p>
+          <p>C / C++</p>
+          <p>JAVA</p>
+          <p>PROCESSING</p>
+          <p>C#</p>
+          <p>HTML/CSS</p>
+        </div>
+
+        <div>
+          <h2>TOOLS</h2>
+          <p>REACT</p>
+          <p>REACT NATIVE</p>
+          <p>NODE</p>
+          <p>P5.JS</p>
+          <p>ML5.JS</p>
+          <p>ARDUINO</p>
+          <p>UNITY ENGINE</p>
+          <p>UNREAL ENGINE</p>
+        </div>
+
+        <div>
+          <h2>SKILLS</h2>
+          <p>MERN STACK</p>
+          <p>FULL STACK WEB-DEV</p>
+          <p>FULL STACK SOFTWARE DEV</p>
+          <p>IOT</p>
+          <p>AR / VR / MR</p>
+        </div>
+
+        <div>
+          <h2>DESIGN TOOLS</h2>
+          <p>MAYA</p>
+          <p>BLENDER</p>
+          <p>3DS MAX</p>
+          <p>CINEMA 4D</p>
+          <p>SUBSTANCE PAINTER</p>
+          <p>SUBSTANCE DESIGNER</p>
+          <p>DAVINCE RESOLVE</p>
+          <p>ADOBE CREATIVE CLOUD</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="achieve">
+      <h1 class="sectionHead">ACHIEVEMENTS</h1>
+      <hr class="titleUnder">
+      <br><br>
+
+      <div class="gridView-2">
+        <!--  -->
+      </div>
+
+    </div>
+
+
+    <div id="contact">
+      <h1 class="sectionHead">SAY HI!</h1>
+      <div class="contactMe">
+        <h2>Phone <br> (+91) 7405 448 639</h2>
+        <br>
+        <h2>Email <br> armacwan@gmail.com</h2>
+        <a href="https://github.com/angelmacwan" target="_blank">
+          <svg height="100" viewBox="0 0 16 16" version="1.1" width="50" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z">
+            </path>
+          </svg>
+        </a>
+
+        <a href="https://www.linkedin.com/in/angel-im/" target="_blank">
+          <svg height="100" viewBox="0 0 512 512" width="50" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m256 0c-141.363281 0-256 114.636719-256 256s114.636719 256 256 256 256-114.636719 256-256-114.636719-256-256-256zm-74.390625 387h-62.347656v-187.574219h62.347656zm-31.171875-213.1875h-.40625c-20.921875 0-34.453125-14.402344-34.453125-32.402344 0-18.40625 13.945313-32.410156 35.273437-32.410156 21.328126 0 34.453126 14.003906 34.859376 32.410156 0 18-13.53125 32.402344-35.273438 32.402344zm255.984375 213.1875h-62.339844v-100.347656c0-25.21875-9.027343-42.417969-31.585937-42.417969-17.222656 0-27.480469 11.601563-31.988282 22.800781-1.648437 4.007813-2.050781 9.609375-2.050781 15.214844v104.75h-62.34375s.816407-169.976562 0-187.574219h62.34375v26.558594c8.285157-12.78125 23.109375-30.960937 56.1875-30.960937 41.019531 0 71.777344 26.808593 71.777344 84.421874zm0 0" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="./app.js" charset="utf-8"></script>
+
+</body>
+
+</html>

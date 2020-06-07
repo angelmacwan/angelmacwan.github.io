@@ -1,0 +1,422 @@
+body, * {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+#progressBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: black;
+  height: 0.6rem;
+  width: 0;
+  z-index: 15;
+}
+
+.navMobile {
+  position: fixed;
+  top: -100px;
+  width: 100vw;
+  background: black;
+  padding: 0.4rem;
+  transition: 0.4s;
+}
+
+.navMobile>span {
+  color: white;
+  font-size: 1.8rem;
+  float: right;
+  margin-right: 1rem;
+}
+
+.navMobile>button {
+  background: none;
+  border: none;
+  color: white;
+  margin: 0;
+  padding: 0;
+  font-size: 1.8rem;
+}
+
+.navBar {
+  position: fixed;
+  transition: 0.4s;
+  top: 0;
+  left: 0;
+  background: #ddd;
+  height: 100vh;
+  width: 250px;
+  padding: 4rem 1rem;
+  z-index: 10;
+}
+
+.navBar>a {
+  text-decoration: none;
+  display: block;
+  font-size: 1.3rem;
+  padding: 0.4rem;
+  margin: 0.4rem;
+  color: #666;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.navBar>h1 {
+  font-size: 5rem;
+  text-align: center;
+}
+
+.navMobileClose {
+  display: none;
+  font-size: 2rem;
+  border: none;
+  padding: 0.3rem;
+  background: none;
+}
+
+.navBar>a:focus, .navBar>a:hover {
+  transition: 0.8s;
+  color: black;
+  border-bottom: 1px solid black;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 1rem;
+}
+
+#portfolio, #skills, #achieve, #contact {
+  padding-top: 2rem;
+  opacity: 0;
+}
+
+#home, #portfolio, #skills, #achieve {
+  margin-bottom: 5rem;
+}
+
+.sectionHead {
+  font-size: 2.5rem;
+}
+
+#home {
+  padding: 5rem 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+#home>span>p {
+  font-size: 2.5rem;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+}
+
+#home>img {
+  margin-right: 5rem;
+  border-radius: 50%;
+  height: 250px;
+  border: 2px solid gray;
+  padding: 0.1rem;
+  box-shadow: 4px 3px 10px #999;
+}
+
+#allProjects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  text-align: center;
+}
+
+#allProjects>div {
+  display: none;
+}
+
+#allProjects>div>#pTech {
+  font-style: italic;
+  margin-bottom: 0.4rem;
+}
+
+#allProjects>div>a {
+  margin: 0.5rem;
+  padding: 0.4rem;
+  text-decoration: none;
+  background: black;
+  color: white;
+  border-radius: 0.2rem;
+  transition: 0.4s;
+}
+
+#allProjects>div>a:hover {
+  border-radius: 1rem;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  width: 75%;
+  box-shadow: 4px 4px 2px gray;
+}
+
+.card-image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.card-middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.card:hover {
+  transition: 0.4s;
+  box-shadow: 8px 8px 10px gray;
+}
+
+.card:hover .card-image {
+  filter: blur(5px);
+}
+
+.card:hover .card-middle {
+  opacity: 1;
+}
+
+.card-text {
+  border-radius: 0.2rem;
+  background-color: #333;
+  color: white;
+  padding: 1rem 0.5rem;
+}
+
+.card-text>h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text>p {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.card-text>.info {
+  margin-bottom: 0.2rem;
+  font-style: normal;
+}
+
+.btn-live, .btn-code {
+  text-decoration: none;
+  color: black;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  transition: .4s;
+}
+
+.btn-live:hover, .btn-code:hover {
+  background: black;
+  color: white;
+}
+
+/* CARD END */
+/*  */
+.btn-dark-outline {
+  text-decoration: none;
+  color: black;
+  background: white;
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  transition: .4s;
+}
+
+.btn-dark-outline:hover {
+  background: black;
+  color: white;
+}
+
+.portfolio-grid>* {
+  margin: 2rem auto;
+}
+
+.portfolio-grid {
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.titleUnder {
+  color: black;
+  background: black;
+  width: 5rem;
+}
+
+.gridView {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 1rem;
+}
+
+.gridView>div {
+  padding: 1rem;
+}
+
+/*
+.gridView>div:hover {
+  transition: 0.4s;
+  background: #eee;
+  border-radius: 0.4rem;
+  box-shadow: 2px 2px 9px #ddd;
+}
+ */
+.gridView>div>h2 {
+  font-size: 1.8rem;
+}
+
+.gridView>div>p {
+  margin: 0.8rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.gridView-2 {
+  margin: 0.4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+  grid-row-gap: 1.4rem;
+}
+
+.gridView-2>div>p {}
+
+.achieveName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.achieveClg {
+  font-size: 0.9rem;
+}
+
+.achievePos {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.contactMe>a {
+  font-size: 0rem;
+  margin: 2rem;
+}
+
+.contactMe {
+  height: 90vh;
+  padding: 1rem;
+  text-align: center;
+  padding-top: 5rem;
+  color: white;
+  font-size: 1.4rem;
+  background-image: url(https://cdn.pixabay.com/photo/2016/03/26/13/09/notebook-1280538_1280.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* RESPONSIVE */
+/* RESPONSIVE */
+/* RESPONSIVE */
+/* RESPONSIVE */
+/* RESPONSIVE */
+@media only screen and (max-width: 900px) {
+  .gridView {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .navBar {
+    width: 200px;
+    font-size: 1rem;
+  }
+
+  .content {
+    transition: 0.4s;
+    margin-left: 200px;
+  }
+
+  #allProjects {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width:550px) {
+  .navBar {
+    left: -100vw;
+  }
+
+  .content {
+    margin-left: 0;
+    margin-top: 3rem;
+  }
+
+  .navMobileClose {
+    display: block;
+  }
+
+  .navMobile {
+    top: 0;
+    z-index: 9;
+  }
+
+  #home {
+    padding: 2.5rem 0;
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  #home>span>p {
+    font-size: 2rem;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+  }
+
+  #home>img {
+    margin: auto auto;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    box-shadow: 4px 4px 2px gray;
+  }
+
+  .card-middle {
+    width: 90%;
+    z-index: 5;
+  }
+
+  .gridView {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    font-size: 2rem;
+  }
+
+  .gridView-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .contactMe {
+    font-size: 1rem;
+  }
+}
