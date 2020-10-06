@@ -6,6 +6,38 @@ body, * {
   scroll-behavior: smooth;
 }
 
+
+/* SCROL BAR */
+/* SCROL BAR */
+/* SCROL BAR */
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	border-radius: 0.5rem;
+	background: rgb(167, 167, 167);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+::-webkit-scrollbar-button {
+	display: none;
+}
+/* SCROL BAR */
+/* SCROL BAR */
+/* SCROL BAR */
+
 #progressBar {
   position: fixed;
   bottom: 0;
