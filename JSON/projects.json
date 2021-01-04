@@ -1,0 +1,61 @@
+[
+	
+	{
+		"name":"Full Body Tracking",
+		"tech":"P5.JS, ML5.JS, POSENET",
+		"live":"https://angelmacwan.github.io/ML5/POSENET/sketch.html",
+		"git":"https://github.com/angelmacwan/ML5/blob/master/POSENET/app.js",
+		"desc":"ML app for tracking key points on body",
+		"img":"poseNet.jpg"		
+
+	},
+	{
+		"name":"Linear Regression",
+		"tech":"P5.JS",
+		"live":"https://angelmacwan.github.io/P5.JS/Linear%20Regression/",
+		"git":"https://github.com/angelmacwan/P5.JS/tree/master/Linear%20Regression/app.js",
+		"desc":"Visualizing Linear Regression Using Ordinary Least Squares",
+		"img":"regression.jpg"		
+
+   },
+   {
+		"name":"YOLO Object Detection",
+		"tech":"P5.JS, ML5.JS",
+		"live":"https://angelmacwan.github.io/ML5/YOLO%20DETECTION/INDEX.HTML",
+		"git":"https://github.com/angelmacwan/ML5/blob/master/YOLO%20DETECTION/sketch.js",
+		"desc":"Visualizing Linear Regression Using Ordinary Least Squares",
+		"img":"yolo.jpg"
+  },
+   {
+		"name":"Transfer Learning",
+		"tech":"ML5.JS, P5.JS",
+		"live":"https://angelmacwan.github.io/ML5/TRANSFER%20LEARNING/",
+		"git":"https://github.com/angelmacwan/ML5/tree/master/TRANSFER%20LEARNING/sketch.js",
+		"desc":"train a Machine Learning model with your own image data",
+		"img":"transfer.jpg"
+   },
+   {
+		"name":"Cellular Automaton",
+		"tech":"PYTHON, PYGAME",
+		"live":"#",
+		"git":"https://github.com/angelmacwan/Python/blob/main/Cellular_Automaton_GameOfLife.py",
+		"desc":"Python Viz for Conway's Game of Life ",
+		"img":"CellularAutomaton.jpg"
+	},   
+   {
+		"name":"TO-DO (my first react app)",
+		"tech":"REACT, NeDB, NODE, HEROKU",
+		"live":"https://agile-fortress-88290.herokuapp.com/",
+		"git":"https://github.com/angelmacwan/TaskManager",
+		"desc":"train a Machine Learning model with your own image data",
+		"img":"taskmanager.jpg"
+   },
+   {
+		"name":"Tic Tac Toe Game",
+		"tech":"JAVASCRIPT",
+		"live":"https://angelmacwan.github.io/JavaScript/TicTacToe/sketch.html",
+		"git":"https://github.com/angelmacwan/JavaScript/tree/master/TicTacToe",
+		"desc":"",
+		"img":"game.jpg"
+   }
+ ]
