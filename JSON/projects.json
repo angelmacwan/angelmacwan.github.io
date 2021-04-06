@@ -1,5 +1,14 @@
 [
 	{
+		"name":"SITE IS BEEN UPDATED",
+		"tech":"SITE UNDER UPDATE",
+		"live":"https://angelmacwan.github.io",
+		"git":"https://github.com/angelmacwan",
+		"desc":"Site is under an update",
+		"img":"https://a.storyblok.com/f/47007/1200x628/f6a16c2df9/2020-07_automation_blog-post_card_1-0.png"		
+
+	},
+	{
 		"name":"Full Body Tracking",
 		"tech":"P5.JS, ML5.JS, POSENET",
 		"live":"https://angelmacwan.github.io/ML5/POSENET/sketch.html",
