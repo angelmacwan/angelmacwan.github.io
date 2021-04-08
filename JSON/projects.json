@@ -1,11 +1,29 @@
 [
 	{
-		"name":"SITE IS BEEN UPDATED",
-		"tech":"SITE UNDER UPDATE",
-		"live":"https://angelmacwan.github.io",
-		"git":"https://github.com/angelmacwan",
-		"desc":"Site is under an update",
-		"img":"poseNet.jpg"
+		"name":"Human GAN",
+		"tech":"ML5.JS",
+		"live":"https://angelmacwan.github.io/WebImageProcessing/model02/human.html",
+		"git":"https://github.com/angelmacwan/WebImageProcessing",
+		"desc":"A realtime ML Model for generating Humans (kinda) figures from Sketch in browser..(this one sucks)",
+		"img":"humangen.jpg"
+
+	},
+	{
+		"name":"Pikachu GAN",
+		"tech":"ML5.JS",
+		"live":"https://angelmacwan.github.io/WebImageProcessing/model01/catModel.html",
+		"git":"https://github.com/angelmacwan/WebImageProcessing",
+		"desc":"A realtime ML Model for generating Pikachu from Sketch in browser",
+		"img":"pikagen.jpg"
+
+	},
+	{
+		"name":"CS:GO Position Analysis",
+		"tech":"Python",
+		"live":"https://github.com/angelmacwan/CSGO_Position_Analysis/blob/main/CSGO_PositionAnalysis.ipynb",
+		"git":"https://github.com/angelmacwan/CSGO_Position_Analysis",
+		"desc":"Tactical analysis of most used corners in CS:GO (Competitive FPS Game)",
+		"img":"csgo.jpg"
 
 	},
 	{
@@ -49,21 +67,5 @@
 		"git":"https://github.com/angelmacwan/Python/blob/main/Cellular_Automaton_GameOfLife.py",
 		"desc":"Python Viz for Conway's Game of Life ",
 		"img":"CellularAutomaton.jpg"
-	},   
-   {
-		"name":"TO-DO (my first react app)",
-		"tech":"REACT, NeDB, NODE, HEROKU",
-		"live":"https://agile-fortress-88290.herokuapp.com/",
-		"git":"https://github.com/angelmacwan/TaskManager",
-		"desc":"train a Machine Learning model with your own image data",
-		"img":"taskmanager.jpg"
-   },
-   {
-		"name":"Tic Tac Toe Game",
-		"tech":"JAVASCRIPT",
-		"live":"https://angelmacwan.github.io/JavaScript/TicTacToe/sketch.html",
-		"git":"https://github.com/angelmacwan/JavaScript/tree/master/TicTacToe",
-		"desc":"",
-		"img":"game.jpg"
-   }
+	}
  ]
