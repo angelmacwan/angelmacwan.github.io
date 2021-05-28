@@ -1,5 +1,14 @@
 [
 	{
+		"name":"Strange Attractors",
+		"tech":"P5.JS, Processing",
+		"live":"https://angelmacwan.github.io/P5.JS/StrangeAttractors/",
+		"git":"https://github.com/angelmacwan/P5.JS/tree/master/StrangeAttractors",
+		"desc":"Lorenz attractor and Rosselrs Attractor visualized",
+		"img":"StrangeAttractors.jpg"
+
+	},
+	{
 		"name":"Human GAN",
 		"tech":"ML5.JS",
 		"live":"https://angelmacwan.github.io/WebImageProcessing/model02/human.html",
