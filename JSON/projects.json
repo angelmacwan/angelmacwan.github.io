@@ -9,6 +9,15 @@
 
 	},
 	{
+		"name":"K-Means",
+		"tech":"P5.JS",
+		"live":"https://angelmacwan.github.io/P5.JS/KMeans/",
+		"git":"https://github.com/angelmacwan/P5.JS/tree/master/KMeans",
+		"desc":"K-Means visualized using P5 JS",
+		"img":"KMeans.jpg"
+
+	},
+	{
 		"name":"Human GAN",
 		"tech":"ML5.JS",
 		"live":"https://angelmacwan.github.io/WebImageProcessing/model02/human.html",
