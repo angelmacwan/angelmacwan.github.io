@@ -1,5 +1,13 @@
 [
     {
+        "name": "Blood Cell Object Detection",
+        "tech": "YOLO V8, Python, Roboflow, PyTorch",
+        "live": "#",
+        "git": "https://github.com/angelmacwan/Blood-Cell-Object-Detection-using-YOLO-V8",
+        "desc": "Fine tuning of YOLO V8 Model on Blood Cell detection dataset. Project Report pdf available on github",
+        "img": "ga.jpg"
+    },
+    {
         "name": "NeuroEvolution",
         "tech": "JS, P5.JS",
         "live": "https://angelmacwan.github.io/Genetic-Algorithms-and-Neural-Agents/NeuroEvolution/",
