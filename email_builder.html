@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper{
+            display: flex;
+            
+        }
+        .output{
+            max-width: 800px;
+            padding: 10px;
+        }
+        p, h2{
+            margin: 8px;
+        }
+        .user_data{
+            padding: 10px;
+        }
+        button{
+            font-size: 1.3rem;
+        }
+    </style>
+    <title>Job Email</title>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        
+        <div class="user_data">
+            Position: <br> 
+            <input type="text" id="position" placeholder="position" onchange="update()" />
+            <br>
+            <br>
+            Company Name: <br>
+            <input type="text" id="company" placeholder="company" onchange="update()" />
+
+            <br>
+            <br>
+
+            <button onclick="copy_text()">COPY</button>
+
+        </div>
+        
+        <div class="output">
+            <h2>Template</h2>
+            Subject: Application for [Position Title]
+            
+            Dear Hiring Manager
+            
+            I hope this email finds you well. My name is Angel Macwan, and I am writing to express my strong interest in the ${position} position.
+            
+            As a Data Scientist with a Master's in Data Science from Amity University and a Bachelor's in Computer Application and Information Technology from Sardar Patel University, I bring a diverse skill set that includes expertise in Python, R, Java, JavaScript, Spark, Hadoop, TensorFlow, and PyTorch. Currently employed as a Systems Engineer/Big Data Engineer at IBM India, I have hands-on experience in working with big data systems for management and analysis using AWS, Azure, Hadoop, Spark, and DataBricks.
+            
+            During my time at IBM, I have excelled in research-driven projects, particularly in Deep Learning, Natural Language Processing, and AI Automation. My proficiency in programming, coupled with my problem-solving skills and real-world corporate experience, positions me as a valuable candidate in the field of data science.
+            
+            In my previous role as a Data Science Intern at Mindworks Group, I developed an innovative visualization library that significantly reduced the time required for animated visualizations. My experience extends to software analysis at Tata Consultancy Services, where I designed and maintained APIs, tested microservices, and worked with technologies such as React, Node, Python, and Java.
+            
+            I am confident that my skills and experiences align well with the requirements of the ${position} role, and I am eager to contribute my expertise to your dynamic team.
+            
+            Enclosed is my resume, which provides further details about my educational background, professional experience, and certifications, including the Databricks Certified Associate Developer for Apache Spark 3.0.
+            
+            Thank you for considering my application.
+            I am available at your earliest convenience for an interview and can be reached via email at armacwan@gmail.com or by phone at (+91) 7405448639.
+            
+            I look forward to a positive responce.
+            
+            Sincerely,
+            Angel Macwan
+            angelmacwan.github.io
+        </div>
+        
+    </div>
+
+
+    <script>
+
+        let copy_text = ()=>{
+            let copyText = document.querySelector(".output").textContent
+            navigator.clipboard.writeText(copyText);
+        }
+
+
+        let update = ()=>{
+            let position = document.querySelector('#position').value
+            let company = document.querySelector('#company').value
+
+            let node = `
+            <h2>Application for ${position}</h2>
+
+            <p>
+            Dear Hiring Manager 
+            </p>
+            
+            <p>
+            I hope this email finds you well. My name is Angel Macwan, and I am writing to express my strong interest in the ${position} position at ${company}.
+            </p>
+
+           <p> 
+            As a Data Scientist with a Master's in Data Science from Amity University and a Bachelor's in Computer Application and Information Technology from Sardar Patel University, I bring a diverse skill set that includes expertise in Python, R, Java, JavaScript, Spark, Hadoop, TensorFlow, and PyTorch. Currently employed as a Systems Engineer/Big Data Engineer at IBM India, I have hands-on experience in working with big data systems for management and analysis using AWS, Azure, Hadoop, Spark, and DataBricks.
+            </p>
+
+            <p>
+            During my time at IBM, I have excelled in research-driven projects, particularly in Deep Learning, Natural Language Processing, and AI Automation. My proficiency in programming, coupled with my problem-solving skills and real-world corporate experience, positions me as a valuable candidate.
+            </p>
+
+            <p>
+            In my previous role as a Data Science Intern at Mindworks Group, I developed an innovative visualization library that significantly reduced the time required for animated visualizations. My experience extends to software analysis at Tata Consultancy Services, where I designed and maintained APIs, tested microservices, and worked with technologies such as React, Node, Python, and Java.
+            </p>
+
+            <p>
+            I am confident that my skills and experiences align well with the requirements of the ${position} role, and I am eager to contribute my expertise to your dynamic team.
+            </p>
+
+            <p>
+            Enclosed is my resume, which provides further details about my educational background, professional experience, and certifications, including the Databricks Certified Associate Developer for Apache Spark 3.0.
+            </p>
+
+            <p>
+            I am available at your earliest convenience for an interview and can be reached via email at <b>armacwan@gmail.com</b> or by phone at <b>(+91) 7405448639</b>.
+            </p>
+            <p>
+            Thank you for considering my application. <br />
+            I look forward to a positive responce.
+            </p>
+
+            <br />
+            <p>
+            ---<br />
+            Sincerely, <br />
+            Angel Macwan<br />
+            armacwan@gmail.com<br />
+            <b>angelmacwan.github.io</b>
+            </p>
+            `
+
+            document.querySelector(".output").innerHTML = node;
+        }
+    </script>
+</body>
+</html>
