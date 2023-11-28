@@ -59,6 +59,11 @@
 
         let copy_text = ()=>{
             let copyText = document.querySelector(".output").textContent
+
+            copyText = copyText.split(/\r?\n/).filter(line => line.trim() !== "").join("\n\n")
+                    
+            console.log(copyText);
+            
             navigator.clipboard.writeText(copyText);
         }
 
