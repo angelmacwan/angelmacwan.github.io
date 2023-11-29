@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Job Email</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="user_data">
+        Position: <br />
+        <input
+          type="text"
+          id="position"
+          placeholder="position"
+          onchange="update()"
+          required
+          />
+        <br />
+        <br />
+        Company Name: <br />
+        <input
+          type="text"
+          id="company"
+          placeholder="company"
+          onchange="update()"
+          required
+        />
+        <br />
+        <br />
+
+        Email: <br />
+        <input
+          type="email"
+          id="send_to"
+          placeholder="email"
+          onchange="update()"
+          required
+        />
+
+        <br />
+        <br />
+
+        <button onclick="send_mail()">SEND MAIL</button>
+      </div>
+
+      <div class="output">
+        awaiting input...
+
+        <h3 id="subject">Test subject</h3>
+
+        <div id="email_body">Test Body</div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

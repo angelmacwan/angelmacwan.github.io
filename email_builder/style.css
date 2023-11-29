@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  display: flex;
+}
+.output {
+  max-width: 800px;
+  padding: 10px;
+}
+p,
+h2 {
+  margin: 8px;
+}
+.user_data {
+  padding: 10px;
+}
+button {
+  font-size: 1.3rem;
+}
