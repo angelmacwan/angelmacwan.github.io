@@ -1,10 +1,35 @@
 :root {
-    --purple: #762cde;
     --primary: #494877;
-    --white: #e8e8e8;
-    --bgGray: #2f2f2f;
-    --lightGray: #4c4d58;
+    --secondary: #762cde;
+    --accent: var(--primary);
+    --font_color_p: #222222;
+    --font_color_btn: #e8e8e8;
+    --font_color_h1: #e8e8e8;
+    --font_color_h2: #494877;
+    --font_color_h3: #494877;
+    --lighr_gray: #555555;
+    --btn_col_social_links: var(--primary);
+    --background_color: #e8e8e8;
     --font_size_text: 16px;
+}
+
+/* Dark Mode */
+.dark {
+    --primary: #494877;
+    --secondary: #762cde;
+    --accent: #74e8b4;
+    --font_color_p: #e8e8e8;
+    --font_color_h1: #e8e8e8;
+    --font_color_h2: #e8e8e8;
+    --font_color_h3: #e8e8e8;
+    --lighr_gray: #c7c7c7;
+    --background_color: #2d2c41;
+    --btn_col_social_links: #e8e8e8;
+}
+
+body {
+    background: var(--background_color);
+    transition: .2s;
 }
 
 * {
@@ -13,43 +38,56 @@
     font-family: "Roboto", sans-serif;
 }
 
+
 h1>a {
     text-decoration: none;
-    color: var(--white);
+    color: var(--font_color_h1);
 }
 
 p {
     font-size: var(--font_size_text);
     line-height: 1.8;
+    color: var(--font_color_p);
 }
 
 h2 {
     margin-bottom: .5em;
+    color: var(--font_color_h2);
 }
 
 
 .link_button {
-    color: var(--white);
+    color: var(--font_color_btn);
     text-decoration: none;
     padding: .5em 1em;
 }
 
 .link_button_btn {
     background: var(--primary);
-    color: var(--white);
+    color: var(--font_color_btn);
     text-decoration: none;
     padding: .5em 1em;
     border-radius: 5px;
     transition: .2s;
 }
 
+.btn_dark_mode {
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #74e8b4;
+    margin: .5em;
+}
+
 .link_button_btn:hover {
-    background: var(--purple);
+    background: var(--secondary);
 }
 
 .title {
     font-weight: 500;
     text-align: right;
+    color: var(--accent);
 }
 
 .wrapper {
@@ -61,10 +99,11 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--white);
+    color: var(--font_color_p);
     position: sticky;
     top: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 #profile_pic {
@@ -76,10 +115,12 @@ h2 {
     border-radius: 50%;
     width: var(--image_size);
     height: var(--image_size);
+    margin-bottom: 2em;
 }
 
 .navbar>h1 {
     padding: .6rem;
+    color: var(--font_color_h1);
 }
 
 .container {
@@ -93,42 +134,64 @@ h2 {
     align-content: center;
 }
 
-.hero {}
+/* .hero {} */
 
 .hero>div:nth-child(1) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    color: var(--primary);
+    color: var(--font_color_h2);
+}
+
+.social_links {
+    margin-top: 2em;
+}
+
+.social_links>a {
+    text-decoration: none;
+    color: var(--btn_col_social_links);
+    font-size: 2.5em;
+}
+
+.social_links>a>svg {
+    --size: 1em;
+    width: var(--size);
+    height: var(--size);
 }
 
 .project {
     margin-bottom: 2rem;
 }
 
-.project>h3 {
-    color: var(--primary);
+.project>h3,
+.project>h3>a {
+    color: var(--font_color_h3);
+}
+
+.project>h3>a {
+    text-decoration: none;
 }
 
 .project>p {
     line-height: 1.4;
-    color: var(--lightGray);
+    color: var(--lighr_gray);
 }
 
 .project>ul {
-    color: var(--lightGray);
+    color: var(--lighr_gray);
     margin-left: 2em;
 }
 
 footer {
     background: var(--primary);
     text-align: center;
-    color: var(--white);
+    color: var(--font_color_p);
 }
 
 footer>p {
     padding: 1em;
+    color: var(--font_color_p);
 }
 
 .spacer {
@@ -136,6 +199,12 @@ footer>p {
 }
 
 /* NOTES */
+
+ul,
+li {
+    color: var(--font_color_p);
+}
+
 #notes_list_container {
     text-align: right;
 }
@@ -157,7 +226,7 @@ code {
 }
 
 .notes_title {
-    color: var(--primary);
+    color: var(--accent);
     margin-bottom: 1em;
 }
 
@@ -169,15 +238,22 @@ code {
     font-size: 1.2rem;
     margin-bottom: .6rem;
     cursor: pointer;
+    color: var(--font_color_p);
 }
 
 .list_btns_notes:hover {
-    color: var(--primary);
+    color: var(--accent);
 }
 
 strong {
-    color: var(--purple);
+    color: var(--accent);
 }
+
+h1,
+h3 {
+    color: var(--font_color_h2);
+}
+
 
 /* BREAKPOINTS */
 @media screen and (max-width: 1200px) {

@@ -5,8 +5,12 @@ function load_notes(notes_name) {
 	fetch(`./notes/${notes_name}.md`)
 		.then((data) => data.text())
 		.then((data) => {
-			output_container.innerHTML = `<h1 class='notes_title'>${notes_name}</h1>`;
-			output_container.innerHTML += converter.makeHtml(data);
+			let notes = '';
+			notes += `<div class = 'animate__animated animate__fadeIn'><h1 class='notes_title'>${notes_name}</h1>`;
+			notes += converter.makeHtml(data);
+			notes += '</div>';
+
+			output_container.innerHTML = notes;
 			Prism.highlightAll();
 		});
 }

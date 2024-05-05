@@ -9,7 +9,7 @@ function load_projects() {
 
 			data.forEach((project) => {
 				let node = `<div class="project">
-                <h3>${project.name}</h3>
+                <h3><a href="${project.git}" target="_blank">${project.name}</a></h3>
                 <p>${project.desc}</p>
                 </div>`;
 				output_container.innerHTML += node;
