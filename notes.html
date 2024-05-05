@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- MARKDOWN TO HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"
+        integrity="sha512-LhccdVNGe2QMEfI3x4DVV3ckMRe36TfydKss6mJpdHjNFiV07dFpS2xzeZedptKZrwxfICJpez09iNioiSZ3hA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- PRISM -->
+    <!-- Link to Prism.js CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <style>
+        p,
+        ol,
+        ul {
+            line-height: 1.5;
+        }
+
+        ol,
+        ul {
+            margin: 1em 2em;
+        }
+
+        img {
+            max-width: 650px;
+        }
+    </style>
+
+    <title>Angel Macwan</title>
+</head>
+
+<body onload="load_notes_list()">
+
+    <nav class="wrapper navbar">
+        <h1><a href="./index.html">Angel Macwan</a></h1>
+
+        <div>
+            <a href="./notes.html" class="link_button">Notes</a>
+            <a href="#" class="link_button">Review Papers</a>
+        </div>
+    </nav>
+
+    <div class="spacer"></div>
+
+
+    <div class="wrapper container">
+        <div>
+            <h1 class="title">Notes Index</h1>
+
+            <div id="notes_list_container">
+                <!--  -->
+            </div>
+        </div>
+        <div>
+            <div id="notes_display_container">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+    <footer>
+        <p>&copy; 2024 Angel Macwan</p>
+    </footer>
+
+
+    <!-- SCRIPT -->
+    <script src="./notes.js"></script>
+</body>
+
+</html>
