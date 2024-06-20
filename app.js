@@ -8,6 +8,7 @@ function load_projects() {
 			output_container.innerHTML = '';
 
 			data.forEach((project) => {
+				console.log(project);
 				let node = `<div class="project">
                 <h3><a href="${project.git}" target="_blank">${project.name}</a></h3>
                 <p>${project.desc}</p>
