@@ -45,13 +45,16 @@
 </head>
 
 <body onload="onload()">
+    <div class="PAGE_LOADER">
+        <div class="loader_animated_line_thing"></div>
+    </div>
     <nav class="wrapper navbar">
         <h1><a href="./index.html">Angel Macwan</a></h1>
         <div>
-            <a href="https://angelmacwan.github.io/notes_and_blog/blogs-and-notes.html"
-                class="link_button" target="_blank">Notes</a>
-            <a href="https://angelmacwan.github.io/notes_and_blog/projects.html"
-                class="link_button" target="_blank">Personal Projects</a>
+            <a href="https://angelmacwan.github.io/notes_and_blog/blogs-and-notes.html" class="link_button"
+                target="_blank">Notes</a>
+            <a href="https://angelmacwan.github.io/notes_and_blog/projects.html" class="link_button"
+                target="_blank">Personal Projects</a>
             <button class="btn_dark_mode" onclick="dark_mode()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-moon"
                     viewBox="0 0 16 16">
@@ -68,13 +71,12 @@
     <div class="container wrapper hero">
         <div>
             <div id="profile_pic"></div>
-            <h2>Angel Macwan</h2>
-            <small>Data Scientist</small>
-            <small>Data Engineer at IBM</small>
-
+            <h1>Angel Macwan</h1>
+            <span> Data Scientist </span>
+            <span> Data Engineer at IBM </span>
         </div>
         <div>
-            <h2>Hey There !!</h2>
+            <h1>Hey There !!</h1>
             <p>
                 I am a dedicated and proficient Data Scientist with a Master's degree in Data Science and a Bachelor's
                 degree
@@ -122,24 +124,16 @@
 
     <div class="container wrapper">
         <div>
-            <h2 class="title">Research Interests</h2>
-        </div>
-        <div id="research_interest_container">
-            <p>
-                Deep Learning and Machine Learning, Natural Language Processing, Reinforcement Learning for
-                Control Systems, Predictive Analytics
-            </p>
-        </div>
-    </div>
-
-    <div class="container wrapper">
-        <div>
             <h2 class="title">Publications</h2>
         </div>
         <div id="publications_container">
             <div class="project">
                 <h3>Unveiling the Potential of TensorFlow in Disease-Gene Association Extraction through Text
-                    Mining and Deep Learning <small><I>(Accepted for Publication)</i></small></h3>
+                    Mining and Deep Learning
+                    <small>
+                        <I>(Accepted for Publication)</i>
+                    </small>
+                </h3>
 
                 <ul>
                     <li>
@@ -152,6 +146,18 @@
                 </ul>
 
             </div>
+        </div>
+    </div>
+
+    <div class="container wrapper">
+        <div>
+            <h2 class="title">Research Interests</h2>
+        </div>
+        <div id="research_interest_container">
+            <p>
+                Deep Learning and Machine Learning, Natural Language Processing, Reinforcement Learning for
+                Control Systems, Predictive Analytics
+            </p>
         </div>
     </div>
 
@@ -173,7 +179,7 @@
     <div class="spacer"></div>
 
     <footer>
-        <p>&copy; 2024 Angel Macwan</p>
+        <p>&copy; 2025 Angel Macwan</p>
     </footer>
     <!-- SCRIPT -->
     <script src="./app.js"></script>

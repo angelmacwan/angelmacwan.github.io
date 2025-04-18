@@ -66,6 +66,10 @@ body {
     background-image: url(icons/code.svg);
 }
 
+h1 {
+    color: var(--font_color_h2);
+}
+
 h1>a {
     text-decoration: none;
     color: var(--font_color_h1);
@@ -80,6 +84,7 @@ p {
 h2 {
     margin-bottom: .5em;
     color: var(--font_color_h2);
+    font-size: 1.8rem;
 }
 
 
@@ -130,12 +135,12 @@ h2 {
     position: sticky;
     top: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    z-index: 99;
 }
 
 #profile_pic {
     --image_size: 250px;
-    background-image: url(./me.jpg);
+    background-image: url(./me.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -171,6 +176,10 @@ h2 {
     color: var(--font_color_h2);
 }
 
+/* .hero>div:nth-child(1)>p {
+    color: var(--font_color_h2);
+} */
+
 .social_links {
     margin-top: 2em;
 }
@@ -195,7 +204,6 @@ h2 {
 .project>h3>a {
     color: var(--font_color_h3);
     text-decoration: none;
-    display: inline-flex;
 }
 
 .project>h3>a:hover {
@@ -215,12 +223,11 @@ h2 {
 footer {
     background: var(--primary);
     text-align: center;
-    color: var(--font_color_p);
 }
 
 footer>p {
     padding: 1em;
-    color: var(--font_color_p);
+    color: white;
     text-align: center;
 }
 
@@ -228,6 +235,100 @@ footer>p {
     height: 50px;
 }
 
+
+/* PAGE_LOADER START */
+.PAGE_LOADER {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    background: none;
+    z-index: 9999;
+}
+
+.loader_animated_line_thing {
+    height: 0px;
+    width: 0px;
+    animation-name: page_loader_animation_loop;
+    animation-duration: 3s;
+    background-color: rgb(71, 206, 123);
+}
+
+.loader_animated_line_thing::before,
+.loader_animated_line_thing::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    background: var(--primary);
+    height: 49.8%;
+    animation-name: page_reveal_animation;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+    animation-delay: 2500ms;
+}
+
+.loader_animated_line_thing::before {
+    top: 0;
+}
+
+.loader_animated_line_thing::after {
+    bottom: 0;
+}
+
+@keyframes page_reveal_animation {
+    30% {
+        height: 50%;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+@keyframes page_loader_animation_loop {
+    0% {
+        height: 4px;
+        width: 20px;
+    }
+
+    25% {
+        height: 4px;
+        width: 20px;
+    }
+
+    50% {
+        height: 4px;
+        width: 100px;
+    }
+
+    75% {
+        height: 4px;
+        width: 20px;
+    }
+
+    90% {
+        height: 4px;
+        width: 100px;
+    }
+
+    100% {
+        height: 0;
+        width: 100%;
+    }
+
+}
+
+/* PAGE_LOADER END */
 
 /* BREAKPOINTS */
 @media screen and (max-width: 1200px) {
