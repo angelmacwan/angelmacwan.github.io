@@ -1,28 +1,16 @@
-function load_projects() {
-	fetch('./projects.json')
-		.then((data) => data.json())
-		.then((data) => {
-			let output_container = document.querySelector(
-				'#projects_container'
-			);
-			output_container.innerHTML = '';
-
-			data.forEach((project) => {
-				let node = `<div class="project">
-                <h3><a href="${project.git}" target="_blank">${project.name}</a></h3>
-                <p>${project.desc}</p>
-                </div>`;
-				output_container.innerHTML += node;
-			});
-		});
+function dark_mode() {
+    document.body.classList.toggle('dark');
+    var isDarkModeEnabled = document.body.classList.contains('dark');
+    localStorage.setItem('darkModeEnabled', isDarkModeEnabled);
 }
 
+function applyDarkModePreference() {
+    var isDarkModeStored = localStorage.getItem('darkModeEnabled');
+    if (isDarkModeStored && isDarkModeStored === 'true') {
+        document.body.classList.add('dark');
+    }
+}
 
-function onload() {
-
-	setTimeout(() => {
-		document.querySelector('.PAGE_LOADER').style.display = 'none';
-	}, 3000);
-
-	load_projects();
+function main() {
+    applyDarkModePreference();
 }
