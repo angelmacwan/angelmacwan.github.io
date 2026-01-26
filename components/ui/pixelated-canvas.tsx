@@ -74,7 +74,7 @@ export const PixelatedCanvas = ({
 	const dotsRef = useRef<Dot[]>([]);
 	const mouseRef = useRef({ x: -1000, y: -1000 });
 	const targetMouseRef = useRef({ x: -1000, y: -1000 });
-	const animationFrameRef = useRef<number>();
+	const animationFrameRef = useRef<number | undefined>(undefined);
 	const lastFrameTimeRef = useRef<number>(0);
 
 	useEffect(() => {
