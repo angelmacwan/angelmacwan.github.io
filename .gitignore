@@ -1,1 +1,48 @@
+# Node modules
+node_modules/
+
+# Build output
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env files
+.env*
+
+# VS Code settings
 .vscode/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Coverage
+coverage/
+
+# Misc
+*.local
+
+# SvelteKit (if ever used)
+.svelte-kit/
+
+# Mac system files
+Icon?
+
+# Next.js export
+.next-export/
+
+# Storybook
+storybook-static/
+
+# Optional: Ignore lock files (uncomment if needed)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
