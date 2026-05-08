@@ -19,7 +19,7 @@ export function SocialLinks({
 	return (
 		<>
 			<a
-				href="https://raw.githubusercontent.com/angelmacwan/resume/refs/heads/main/Angel%20Macwan%20Data%20Engineer.pdf"
+				href="https://raw.githubusercontent.com/angelmacwan/resume/refs/heads/main/Angel%20Macwan.pdf"
 				target="_blank"
 				rel="noopener noreferrer"
 				className={className}

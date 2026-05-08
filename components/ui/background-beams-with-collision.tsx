@@ -97,24 +97,25 @@ export const BackgroundBeamsWithCollision = ({
 	);
 };
 
-const CollisionMechanism = React.forwardRef<
-	HTMLDivElement,
-	{
-		containerRef: React.RefObject<HTMLDivElement | null>;
-		parentRef: React.RefObject<HTMLDivElement | null>;
-		beamOptions?: {
-			initialX?: number;
-			translateX?: number;
-			initialY?: number;
-			translateY?: number;
-			rotate?: number;
-			className?: string;
-			duration?: number;
-			delay?: number;
-			repeatDelay?: number;
-		};
-	}
->(({ parentRef, containerRef, beamOptions = {} }, ref) => {
+const CollisionMechanism = ({
+	containerRef,
+	parentRef,
+	beamOptions = {},
+}: {
+	containerRef: React.RefObject<HTMLDivElement | null>;
+	parentRef: React.RefObject<HTMLDivElement | null>;
+	beamOptions?: {
+		initialX?: number;
+		translateX?: number;
+		initialY?: number;
+		translateY?: number;
+		rotate?: number;
+		className?: string;
+		duration?: number;
+		delay?: number;
+		repeatDelay?: number;
+	};
+}) => {
 	const beamRef = useRef<HTMLDivElement>(null);
 	const [collision, setCollision] = useState<{
 		detected: boolean;
@@ -159,7 +160,7 @@ const CollisionMechanism = React.forwardRef<
 		const animationInterval = setInterval(checkCollision, 50);
 
 		return () => clearInterval(animationInterval);
-	}, [cycleCollisionDetected, containerRef]);
+	}, [cycleCollisionDetected, containerRef, parentRef]);
 
 	useEffect(() => {
 		if (collision.detected && collision.coordinates) {
@@ -220,18 +221,19 @@ const CollisionMechanism = React.forwardRef<
 			</AnimatePresence>
 		</>
 	);
-});
-
-CollisionMechanism.displayName = 'CollisionMechanism';
+};
 
 const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
-	const spans = Array.from({ length: 20 }, (_, index) => ({
-		id: index,
-		initialX: 0,
-		initialY: 0,
-		directionX: Math.floor(Math.random() * 80 - 40),
-		directionY: Math.floor(Math.random() * -50 - 10),
-	}));
+	const [spans] = React.useState(() =>
+		Array.from({ length: 20 }, (_, index) => ({
+			id: index,
+			initialX: 0,
+			initialY: 0,
+			directionX: Math.floor(Math.random() * 80 - 40),
+			directionY: Math.floor(Math.random() * -50 - 10),
+			duration: Math.random() * 1.5 + 0.5,
+		})),
+	);
 
 	return (
 		<div
@@ -255,7 +257,7 @@ const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
 						opacity: 0,
 					}}
 					transition={{
-						duration: Math.random() * 1.5 + 0.5,
+						duration: span.duration,
 						ease: 'easeOut',
 					}}
 					className="absolute h-1 w-1 rounded-full bg-gradient-to-b from-indigo-500 to-purple-500"

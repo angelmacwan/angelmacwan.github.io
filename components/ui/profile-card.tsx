@@ -3,7 +3,6 @@ import React, {
 	useRef,
 	useCallback,
 	useMemo,
-	useState,
 } from 'react';
 
 const DEFAULT_INNER_GRADIENT =

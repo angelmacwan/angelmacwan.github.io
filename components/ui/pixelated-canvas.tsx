@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 interface PixelatedCanvasProps {
@@ -13,7 +12,6 @@ interface PixelatedCanvasProps {
 	backgroundColor?: string;
 	grayscale?: boolean;
 	className?: string;
-	responsive?: boolean;
 	dropoutStrength?: number;
 	interactive?: boolean;
 	distortionStrength?: number;
@@ -52,7 +50,6 @@ export const PixelatedCanvas = ({
 	backgroundColor = '#000000',
 	grayscale = false,
 	className,
-	responsive = false,
 	dropoutStrength = 0.4,
 	interactive = true,
 	distortionStrength = 3,
