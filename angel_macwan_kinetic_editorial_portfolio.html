@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANGEL MACWAN — Data Systems, Biological AI &amp; Indie Apps</title>
+
+  <!-- Avant-Garde Editorial Typography Stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS (Layout & Responsive Utilities) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* =========================================================================
+       1. DESIGN TOKENS — OBSIDIAN INK & GALLERY PAPER INVERT SYSTEM
+       ========================================================================= */
+    :root {
+      --bg: #0B0B0C;
+      --bg-elevated: #121214;
+      --fg: #F0EDE6;
+      --muted: #78756E;
+      --hairline: rgba(240, 237, 230, 0.14);
+      --hairline-strong: rgba(240, 237, 230, 0.32);
+      --accent: #FF3B00;
+      --accent-ink: #0B0B0C;
+      --nav-bg: rgba(11, 11, 12, 0.72);
+      --ease-expo: cubic-bezier(0.76, 0, 0.24, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    :root[data-mode="light"] {
+      --bg: #F3F1EB;
+      --bg-elevated: #EAE6DC;
+      --fg: #0B0B0C;
+      --muted: #6C6962;
+      --hairline: rgba(11, 11, 12, 0.14);
+      --hairline-strong: rgba(11, 11, 12, 0.34);
+      --accent: #FF3B00;
+      --accent-ink: #F3F1EB;
+      --nav-bg: rgba(243, 241, 235, 0.78);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: var(--bg);
+      color: var(--fg);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.5s var(--ease-expo), color 0.5s var(--ease-expo);
+    }
+
+    /* Hide native cursor on fine-pointer desktops for custom magnetic cursor */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input[type="range"] {
+        cursor: none !important;
+      }
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+
+    /* Typography Helpers */
+    .font-syne { font-family: 'Syne', sans-serif; }
+    .font-serif-ed { font-family: 'Instrument Serif', Georgia, serif; }
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Hairline Utilities */
+    .hairline-t { border-top: 1px solid var(--hairline); }
+    .hairline-b { border-bottom: 1px solid var(--hairline); }
+    .hairline-all { border: 1px solid var(--hairline); }
+
+    /* =========================================================================
+       2. SUBTLE ANIMATED FILM-GRAIN OVERLAY (INLINE SVG, ZERO EXTERNAL ASSETS)
+       ========================================================================= */
+    .film-grain {
+      position: fixed;
+      inset: -10%;
+      width: 120%;
+      height: 120%;
+      pointer-events: none;
+      z-index: 90;
+      opacity: 0.036;
+      mix-blend-mode: overlay;
+      animation: grainShift 0.6s steps(4) infinite;
+    }
+
+    @keyframes grainShift {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-2%, 1.5%); }
+      50%  { transform: translate(1.5%, -2%); }
+      75%  { transform: translate(-1%, -1%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* =========================================================================
+       3. PRELOADER CURTAIN & MASKED HERO REVEALS
+       ========================================================================= */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      background-color: #0B0B0C;
+      color: #F0EDE6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem;
+      transform: translateY(0%);
+      transition: transform 0.9s var(--ease-expo);
+      will-change: transform;
+    }
+
+    #preloader.is-done {
+      transform: translateY(-102%);
+      pointer-events: none;
+    }
+
+    .reveal-mask {
+      overflow: hidden;
+      display: block;
+    }
+
+    .reveal-line {
+      display: block;
+      transform: translateY(112%);
+      opacity: 0;
+      transition: transform 1.05s var(--ease-expo), opacity 0.8s ease;
+      will-change: transform;
+    }
+
+    body.is-ready .reveal-line {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+
+    body.is-ready .reveal-d1 { transition-delay: 0.06s; }
+    body.is-ready .reveal-d2 { transition-delay: 0.16s; }
+    body.is-ready .reveal-d3 { transition-delay: 0.26s; }
+    body.is-ready .reveal-d4 { transition-delay: 0.38s; }
+
+    /* =========================================================================
+       4. CUSTOM MAGNETIC CURSOR
+       ========================================================================= */
+    #cursor-dot,
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 150;
+      transform: translate3d(-100px, -100px, 0);
+      will-change: transform, width, height, background-color;
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      #cursor-dot, #cursor-ring { display: flex; }
+    }
+
+    #cursor-dot {
+      width: 6px;
+      height: 6px;
+      margin-left: -3px;
+      margin-top: -3px;
+      border-radius: 9999px;
+      background-color: var(--fg);
+      transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    #cursor-ring {
+      width: 34px;
+      height: 34px;
+      margin-left: -17px;
+      margin-top: -17px;
+      border-radius: 9999px;
+      border: 1px solid var(--hairline-strong);
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      transition:
+        width 0.32s var(--ease-out),
+        height 0.32s var(--ease-out),
+        margin 0.32s var(--ease-out),
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        border-radius 0.32s var(--ease-out);
+    }
+
+    #cursor-ring.is-hover-link {
+      width: 48px;
+      height: 48px;
+      margin-left: -24px;
+      margin-top: -24px;
+      border-color: var(--accent);
+      background-color: rgba(255, 59, 0, 0.1);
+    }
+
+    #cursor-ring.is-pill {
+      width: 92px;
+      height: 34px;
+      margin-left: -46px;
+      margin-top: -17px;
+      border-radius: 9999px;
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    #cursor-ring.is-pill-open {
+      width: 78px;
+      height: 34px;
+      margin-left: -39px;
+      margin-top: -17px;
+      border-radius: 9999px;
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    /* =========================================================================
+       5. FIXED ARCHITECTURAL TOP BAR
+       ========================================================================= */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hairline);
+      transition: background-color 0.5s var(--ease-expo), border-color 0.5s var(--ease-expo);
+    }
+
+    /* =========================================================================
+       6. HERO & MARQUEE
+       ========================================================================= */
+    .hero-display {
+      font-size: clamp(1.85rem, 3.5vw, 3.85rem);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      max-width: 56rem;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+    }
+
+    /* =========================================================================
+       7. SELECTED WORKS ROWS & FLOATING 3D PREVIEW STAGE
+       ========================================================================= */
+    .work-row {
+      position: relative;
+      border-bottom: 1px solid var(--hairline);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .work-row:hover {
+      border-bottom-color: var(--hairline-strong);
+    }
+
+    .work-title {
+      font-size: clamp(1.85rem, 4.5vw, 4.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      transition: transform 0.45s var(--ease-out), color 0.3s ease;
+    }
+
+    .work-row:hover .work-title {
+      transform: translateX(22px);
+      color: var(--accent);
+    }
+
+    .work-row:hover .work-title-serif {
+      font-style: italic;
+    }
+
+    /* Floating Cursor-Tracked Live Preview Stage */
+    #preview-stage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 360px;
+      height: 230px;
+      pointer-events: none;
+      z-index: 70;
+      opacity: 0;
+      border: 1px solid var(--hairline-strong);
+      background-color: #0B0B0C;
+      overflow: hidden;
+      transform-origin: center center;
+      transition: opacity 0.28s var(--ease-out);
+      box-shadow: 0 28px 60px -15px rgba(0, 0, 0, 0.65);
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      #preview-stage { display: block; }
+    }
+
+    #preview-stage.is-visible {
+      opacity: 1;
+    }
+
+    /* =========================================================================
+       8. FULL-SCREEN CASE STUDY TAKEOVER
+       ========================================================================= */
+    #case-takeover {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background-color: var(--bg);
+      color: var(--fg);
+      transform: translateY(100%);
+      transition: transform 0.72s var(--ease-expo);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      will-change: transform;
+    }
+
+    #case-takeover.is-open {
+      transform: translateY(0%);
+    }
+
+    /* Minimal Custom Range Slider for Case Study Playgrounds */
+    input[type="range"].studio-range {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 2px;
+      background: var(--hairline-strong);
+      outline: none;
+    }
+
+    input[type="range"].studio-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border: none;
+      border-radius: 0;
+    }
+
+    /* =========================================================================
+       9. THREE PILLARS ACCORDION
+       ========================================================================= */
+    .accordion-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.55s var(--ease-expo);
+    }
+
+    .accordion-item.is-open .accordion-body {
+      grid-template-rows: 1fr;
+    }
+
+    .accordion-inner {
+      overflow: hidden;
+    }
+
+    .accordion-plus {
+      transition: transform 0.45s var(--ease-expo), color 0.3s ease;
+    }
+
+    .accordion-item.is-open .accordion-plus {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    /* =========================================================================
+       10. KINETIC FOOTER CTA
+       ========================================================================= */
+    .footer-cta {
+      position: relative;
+      display: inline-block;
+      font-size: clamp(3rem, 11.5vw, 11rem);
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      transition: color 0.35s ease;
+    }
+
+    .footer-cta::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -0.06em;
+      width: 100%;
+      height: 3px;
+      background-color: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right center;
+      transition: transform 0.6s var(--ease-expo);
+    }
+
+    .footer-cta:hover {
+      color: var(--accent);
+    }
+
+    .footer-cta:hover::after {
+      transform: scaleX(1);
+      transform-origin: left center;
+    }
+
+    /* Minimal Mono Toast */
+    #mono-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 160;
+      background-color: var(--fg);
+      color: var(--bg);
+      padding: 10px 16px;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s var(--ease-out), opacity 0.35s ease;
+    }
+
+    #mono-toast.is-shown {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       SUBTLE ANIMATED FILM-GRAIN OVERLAY (INLINE SVG FILTER)
+       ========================================================================= -->
+  <svg class="film-grain" aria-hidden="true">
+    <filter id="studio-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#studio-grain)" />
+  </svg>
+
+  <!-- =========================================================================
+       1. CRISP PRELOADER CURTAIN (~900ms)
+       ========================================================================= -->
+  <div id="preloader" aria-hidden="false">
+    <div class="flex items-center justify-between font-mono-tech text-[#78756E]">
+      <span>ANGEL MACWAN — PORTFOLIO</span>
+      <span>SYSTEMS / BIO-AI / APPS</span>
+    </div>
+
+    <div class="my-auto flex flex-col items-start">
+      <div class="font-mono-tech text-[#78756E] mb-3">INITIALIZING FIELD</div>
+      <div id="preloader-count" class="font-mono text-[clamp(4.5rem,16vw,12rem)] leading-none tracking-tighter text-[#F0EDE6]">
+        00
+      </div>
+    </div>
+
+    <div>
+      <div class="w-full h-[1px] bg-white/15 overflow-hidden">
+        <div id="preloader-bar" class="h-full bg-[#FF3B00] w-0 transition-none"></div>
+      </div>
+      <div class="mt-3 flex justify-between font-mono-tech text-[#78756E]">
+        <span>HYBRID TECHNOLOGIST</span>
+        <span>EST. 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CUSTOM MAGNETIC CURSOR (DESKTOP ONLY)
+       ========================================================================= -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"><span id="cursor-label"></span></div>
+
+  <!-- =========================================================================
+       FLOATING CURSOR-TRACKED LIVE PREVIEW STAGE (360x230px)
+       ========================================================================= -->
+  <div id="preview-stage" aria-hidden="true">
+    <canvas id="preview-canvas" class="block w-full h-full"></canvas>
+    <div class="absolute bottom-2 left-3 right-3 flex items-center justify-between font-mono-tech text-[9px] text-[#F0EDE6]/80 pointer-events-none">
+      <span id="preview-meta-left">LIVE PROCEDURAL FEED</span>
+      <span id="preview-meta-right" class="text-[#FF3B00]">60 FPS</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       4. FIXED ARCHITECTURAL TOP BAR
+       ========================================================================= -->
+  <header class="top-bar">
+    <div class="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-4 sm:px-8">
+      <!-- Left: Identity -->
+      <a href="#hero" class="magnetic font-syne text-xs sm:text-sm font-bold tracking-[0.14em] uppercase">
+        ANGEL MACWAN
+      </a>
+
+      <!-- Center: Live Telemetry (Local Clock, Cursor X/Y, Scroll %) -->
+      <div class="hidden lg:flex items-center gap-7 font-mono-tech text-[var(--muted)]">
+        <span class="flex items-center gap-2">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-[#FF3B00]"></span>
+          <span id="live-clock" class="text-[var(--fg)]">00:00:00</span>
+        </span>
+        <span id="live-coords">X: 0000 &nbsp;Y: 0000</span>
+        <span>SCRL <span id="live-scroll" class="text-[var(--fg)]">00%</span></span>
+      </div>
+
+      <!-- Right: Index Nav + INVERT Toggle -->
+      <div class="flex items-center gap-4 sm:gap-6">
+        <a href="#works" class="magnetic hidden sm:inline-block font-mono-tech text-[var(--muted)] hover:text-[var(--fg)] transition-colors">
+          WORKS
+        </a>
+        <a href="#practice" class="magnetic hidden sm:inline-block font-mono-tech text-[var(--muted)] hover:text-[var(--fg)] transition-colors">
+          PRACTICE
+        </a>
+        <button
+          id="btn-invert"
+          type="button"
+          class="magnetic hairline-all px-3 py-1.5 font-mono-tech text-[var(--fg)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors"
+          aria-label="Invert theme polarity"
+        >
+          INVERT
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO SECTION + LIVING GENERATIVE CANVAS
+       ========================================================================= -->
+  <section id="hero" class="relative min-h-screen flex flex-col justify-center pt-20 pb-12 overflow-hidden">
+    <!-- Full-Bleed Living Generative Topology / CompBio Canvas -->
+    <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Unified Editorial Composition: Eyebrow + Headline + Sub-Hero Strip -->
+    <div class="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 my-auto">
+      <div class="mb-6 sm:mb-8 flex items-center justify-between font-mono-tech text-[var(--muted)]">
+        <span class="reveal-mask"><span class="reveal-line reveal-d1">00 / HYBRID TECHNOLOGIST</span></span>
+        <span class="reveal-mask hidden sm:block"><span class="reveal-line reveal-d1">DATA ENG &times; BIOLOGICAL AI &times; AGENT ENGINES</span></span>
+      </div>
+
+      <h1 class="hero-display uppercase select-none">
+        <span class="reveal-mask">
+          <span class="reveal-line reveal-d1 font-syne font-extrabold">DATA SYSTEMS,</span>
+        </span>
+        <span class="reveal-mask">
+          <span class="reveal-line reveal-d2">
+            <span class="font-serif-ed italic font-normal lowercase tracking-normal pr-2 sm:pr-4 text-[1.06em]" style="color: var(--accent);">biological</span>
+            <span class="font-syne font-extrabold">AI,</span>
+          </span>
+        </span>
+        <span class="reveal-mask">
+          <span class="reveal-line reveal-d3 font-syne font-extrabold">&amp; AGENT ENGINES.</span>
+        </span>
+      </h1>
+
+      <!-- Clean 2-Column Sub-Hero Strip Below Hairline Rule -->
+      <div class="hairline-t pt-6 mt-8 sm:mt-10 grid grid-cols-1 gap-6 md:grid-cols-12 items-end">
+        <div class="md:col-span-8 reveal-mask">
+          <p class="reveal-line reveal-d4 max-w-2xl text-sm sm:text-base leading-relaxed text-[var(--muted)]">
+            <strong class="font-medium text-[var(--fg)]">Data Engineer at IBM</strong> architecting scalable cloud data platforms across Snowflake, Databricks, and AWS.
+            <strong class="font-medium text-[var(--fg)]">AI &amp; Computational Biology researcher</strong> engineering clinical vision models for ocular morphometrics and biomedical NLP.
+            Creator of <strong class="font-medium text-[var(--fg)]">Thallus</strong> and agentic intelligence systems.
+          </p>
+        </div>
+
+        <div class="md:col-span-4 flex md:justify-end items-center reveal-mask">
+          <a
+            href="#works"
+            class="reveal-line reveal-d4 magnetic group inline-flex items-center gap-3 hairline-all px-5 py-3 font-mono-tech text-[var(--fg)] hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all duration-300"
+          >
+            <span>EXPLORE INDEX</span>
+            <span class="inline-block transition-transform duration-300 group-hover:translate-y-0.5">&darr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       VELOCITY-REACTIVE HORIZONTAL TYPOGRAPHIC MARQUEE
+       ========================================================================= -->
+  <div class="hairline-t hairline-b py-4 overflow-hidden select-none bg-[var(--bg-elevated)]" aria-hidden="true">
+    <div id="marquee-track" class="marquee-track font-syne text-lg sm:text-2xl font-bold tracking-[0.06em] uppercase text-[var(--fg)]">
+      <span class="pr-8">IBM DATA ENGINEERING &mdash; COMPUTATIONAL BIOLOGY &mdash; DEEP LEARNING &mdash; IOS &amp; ANDROID &mdash; CREATIVE SYSTEMS &mdash;</span>
+      <span class="pr-8">IBM DATA ENGINEERING &mdash; COMPUTATIONAL BIOLOGY &mdash; DEEP LEARNING &mdash; IOS &amp; ANDROID &mdash; CREATIVE SYSTEMS &mdash;</span>
+      <span class="pr-8">IBM DATA ENGINEERING &mdash; COMPUTATIONAL BIOLOGY &mdash; DEEP LEARNING &mdash; IOS &amp; ANDROID &mdash; CREATIVE SYSTEMS &mdash;</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. SIGNATURE AWWWARDS "SELECTED WORKS" INTERACTIVE INDEX (01–04)
+       ========================================================================= -->
+  <section id="works" class="mx-auto max-w-[1440px] px-4 sm:px-8 py-20 sm:py-32">
+    <!-- Section Header + Minimal Discipline Filter Bar -->
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between pb-8 hairline-b">
+      <div>
+        <div class="font-mono-tech text-[var(--muted)] mb-2">01 / SELECTED WORKS</div>
+        <h2 class="font-syne text-3xl sm:text-5xl font-bold tracking-tight uppercase">
+          Index of <span class="font-serif-ed italic font-normal lowercase text-[1.12em]">artifacts</span>
+        </h2>
+      </div>
+
+      <!-- Minimal Discipline Filter Bar -->
+      <div id="filter-bar" class="flex flex-wrap items-center gap-2 sm:gap-3" role="tablist" aria-label="Filter projects">
+        <button type="button" data-filter="all" class="filter-btn magnetic hairline-all px-3.5 py-2 font-mono-tech transition-colors" aria-selected="true">
+          ALL [04]
+        </button>
+        <button type="button" data-filter="data" class="filter-btn magnetic hairline-all px-3.5 py-2 font-mono-tech transition-colors" aria-selected="false">
+          DATA ENG [01]
+        </button>
+        <button type="button" data-filter="bio" class="filter-btn magnetic hairline-all px-3.5 py-2 font-mono-tech transition-colors" aria-selected="false">
+          AI &amp; BIO [01]
+        </button>
+        <button type="button" data-filter="apps" class="filter-btn magnetic hairline-all px-3.5 py-2 font-mono-tech transition-colors" aria-selected="false">
+          APPS &amp; LAB [02]
+        </button>
+      </div>
+    </div>
+
+    <!-- Full-Width Horizontal Hairline Project Rows -->
+    <div id="works-list" class="divide-y divide-[var(--hairline)]">
+      <!-- Row 01 -->
+      <article
+        class="work-row group py-8 sm:py-11 grid grid-cols-1 md:grid-cols-12 items-baseline gap-3 md:gap-4"
+        data-category="data"
+        data-project="0"
+        tabindex="0"
+        role="button"
+        aria-label="Open Enterprise Data Mesh case study"
+      >
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
+          01
+        </div>
+        <div class="md:col-span-7">
+          <h3 class="work-title font-syne font-bold uppercase">
+            ENTERPRISE <span class="work-title-serif font-serif-ed font-normal lowercase tracking-normal">data</span> MESH
+          </h3>
+        </div>
+        <div class="md:col-span-3 font-mono-tech text-[var(--muted)]">
+          IBM &middot; DATA ENGINEERING
+        </div>
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] md:text-right flex items-center justify-between md:justify-end gap-2">
+          <span>2025</span>
+          <span class="md:hidden text-[var(--accent)]">VIEW &nearr;</span>
+        </div>
+      </article>
+
+      <!-- Row 02 -->
+      <article
+        class="work-row group py-8 sm:py-11 grid grid-cols-1 md:grid-cols-12 items-baseline gap-3 md:gap-4"
+        data-category="bio"
+        data-project="1"
+        tabindex="0"
+        role="button"
+        aria-label="Open Ocular Morphometrics AI case study"
+      >
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
+          02
+        </div>
+        <div class="md:col-span-7">
+          <h3 class="work-title font-syne font-bold uppercase">
+            OCULAR <span class="work-title-serif font-serif-ed font-normal lowercase tracking-normal">morphometrics</span> AI
+          </h3>
+        </div>
+        <div class="md:col-span-3 font-mono-tech text-[var(--muted)]">
+          UNIVERSITY &middot; COMP-BIO &amp; ML
+        </div>
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] md:text-right flex items-center justify-between md:justify-end gap-2">
+          <span>2025</span>
+          <span class="md:hidden text-[var(--accent)]">VIEW &nearr;</span>
+        </div>
+      </article>
+
+      <!-- Row 03 -->
+      <article
+        class="work-row group py-8 sm:py-11 grid grid-cols-1 md:grid-cols-12 items-baseline gap-3 md:gap-4"
+        data-category="apps"
+        data-project="2"
+        tabindex="0"
+        role="button"
+        aria-label="Open Kippo Companion case study"
+      >
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
+          03
+        </div>
+        <div class="md:col-span-7">
+          <h3 class="work-title font-syne font-bold uppercase">
+            KIPPO <span class="work-title-serif font-serif-ed font-normal lowercase tracking-normal">companion</span>
+          </h3>
+        </div>
+        <div class="md:col-span-3 font-mono-tech text-[var(--muted)]">
+          INDIE IOS APP &middot; FLUTTER &amp; AI
+        </div>
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] md:text-right flex items-center justify-between md:justify-end gap-2">
+          <span>2026</span>
+          <span class="md:hidden text-[var(--accent)]">VIEW &nearr;</span>
+        </div>
+      </article>
+
+      <!-- Row 04 -->
+      <article
+        class="work-row group py-8 sm:py-11 grid grid-cols-1 md:grid-cols-12 items-baseline gap-3 md:gap-4"
+        data-category="apps"
+        data-project="3"
+        tabindex="0"
+        role="button"
+        aria-label="Open BioVision and Multi-Platform Lab case study"
+      >
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
+          04
+        </div>
+        <div class="md:col-span-7">
+          <h3 class="work-title font-syne font-bold uppercase">
+            BIOVISION &amp; <span class="work-title-serif font-serif-ed font-normal lowercase tracking-normal">multi-platform</span> LAB
+          </h3>
+        </div>
+        <div class="md:col-span-3 font-mono-tech text-[var(--muted)]">
+          APPS &amp; EXPERIMENTS &middot; WEB/ML
+        </div>
+        <div class="md:col-span-1 font-mono-tech text-[var(--muted)] md:text-right flex items-center justify-between md:justify-end gap-2">
+          <span>2026</span>
+          <span class="md:hidden text-[var(--accent)]">VIEW &nearr;</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. INTERACTIVE "THREE PILLARS" EXPANDABLE STUDIO ACCORDION (02 / PRACTICE)
+       ========================================================================= -->
+  <section id="practice" class="mx-auto max-w-[1440px] px-4 sm:px-8 py-16 sm:py-28">
+    <div class="pb-8 hairline-b flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <div class="font-mono-tech text-[var(--muted)] mb-2">02 / PRACTICE</div>
+        <h2 class="font-syne text-3xl sm:text-5xl font-bold tracking-tight uppercase">
+          Three <span class="font-serif-ed italic font-normal lowercase text-[1.12em]">disciplines</span>
+        </h2>
+      </div>
+      <div class="font-mono-tech text-[var(--muted)]">
+        CLICK ANY PILLAR TO INSPECT SPECS
+      </div>
+    </div>
+
+    <div id="practice-accordion" class="divide-y divide-[var(--hairline)] hairline-b">
+      <!-- Pillar 01 -->
+      <div class="accordion-item is-open">
+        <button type="button" class="accordion-trigger w-full py-7 sm:py-9 flex items-center justify-between gap-4 text-left group">
+          <div class="flex items-baseline gap-5 sm:gap-10">
+            <span class="font-mono-tech text-[var(--accent)]">01</span>
+            <span class="font-syne text-xl sm:text-3xl font-bold uppercase tracking-tight group-hover:text-[var(--accent)] transition-colors">
+              Enterprise Data Engineering @ IBM
+            </span>
+          </div>
+          <span class="accordion-plus font-mono text-2xl leading-none text-[var(--muted)]">+</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-inner">
+            <div class="pb-9 pl-0 sm:pl-14 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+              <div class="md:col-span-6">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">PHILOSOPHY</div>
+                <p class="text-sm sm:text-base leading-relaxed text-[var(--fg)]/85">
+                  Enterprise data platforms fail when governance is bolted on as an afterthought. I architect metadata-driven Enablement Zones and automated Snowflake snapshot pipelines so analytics teams consume trustworthy, zero-copy datasets at scale.
+                </p>
+              </div>
+              <div class="md:col-span-3">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">CORE STACK</div>
+                <p class="font-mono-tech leading-loose text-[var(--fg)]">
+                  SNOWFLAKE / DATABRICKS<br />
+                  PYTHON / SQL / SPARK<br />
+                  RBAC / CI-CD / LINEAGE
+                </p>
+              </div>
+              <div class="md:col-span-3">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">CREDENTIALS</div>
+                <p class="font-mono-tech leading-loose text-[var(--fg)]">
+                  DATABRICKS CERTIFIED<br />
+                  PROFESSIONAL DEVELOPER<br />
+                  IBM DATA PLATFORMS
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 02 -->
+      <div class="accordion-item">
+        <button type="button" class="accordion-trigger w-full py-7 sm:py-9 flex items-center justify-between gap-4 text-left group">
+          <div class="flex items-baseline gap-5 sm:gap-10">
+            <span class="font-mono-tech text-[var(--accent)]">02</span>
+            <span class="font-syne text-xl sm:text-3xl font-bold uppercase tracking-tight group-hover:text-[var(--accent)] transition-colors">
+              AI, ML &amp; Computational Biology Research
+            </span>
+          </div>
+          <span class="accordion-plus font-mono text-2xl leading-none text-[var(--muted)]">+</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-inner">
+            <div class="pb-9 pl-0 sm:pl-14 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+              <div class="md:col-span-6">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">PHILOSOPHY</div>
+                <p class="text-sm sm:text-base leading-relaxed text-[var(--fg)]/85">
+                  Bridging state-of-the-art vision transformers and biomedical language models with clinical rigor. My university research translates raw microscopy, infrared meibography, and PubMed corpora into quantitative, interpretable biomarkers.
+                </p>
+              </div>
+              <div class="md:col-span-3">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">DOMAINS</div>
+                <p class="font-mono-tech leading-loose text-[var(--fg)]">
+                  MEDICAL SEGMENTATION<br />
+                  MICROSCOPY VISION<br />
+                  BIOMEDICAL NLP / NER
+                </p>
+              </div>
+              <div class="md:col-span-3">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">TOOLKIT</div>
+                <p class="font-mono-tech leading-loose text-[var(--fg)]">
+                  PYTORCH / TENSORFLOW<br />
+                  SEGFORMER / VOLO-D5<br />
+                  BERT / OPENCV / SCIPY
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar 03 -->
+      <div class="accordion-item">
+        <button type="button" class="accordion-trigger w-full py-7 sm:py-9 flex items-center justify-between gap-4 text-left group">
+          <div class="flex items-baseline gap-5 sm:gap-10">
+            <span class="font-mono-tech text-[var(--accent)]">03</span>
+            <span class="font-syne text-xl sm:text-3xl font-bold uppercase tracking-tight group-hover:text-[var(--accent)] transition-colors">
+              Indie iOS, Android &amp; Web Craft
+            </span>
+          </div>
+          <span class="accordion-plus font-mono text-2xl leading-none text-[var(--muted)]">+</span>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-inner">
+            <div class="pb-9 pl-0 sm:pl-14 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+              <div class="md:col-span-6">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">PHILOSOPHY</div>
+                <p class="text-sm sm:text-base leading-relaxed text-[var(--fg)]/85">
+                  Building consumer software from zero to App Store sharpens every engineering instinct. I obsess over tactile 60fps micro-interactions, native entitlements, and cross-platform developer utilities built purely for joy and utility.
+                </p>
+              </div>
+              <div class="md:col-span-3">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">PLATFORMS</div>
+                <p class="font-mono-tech leading-loose text-[var(--fg)]">
+                  IOS / STOREKIT 2<br />
+                  ANDROID / REACT NATIVE<br />
+                  WEB / CANVAS / C++ CLI
+                </p>
+              </div>
+              <div class="md:col-span-3">
+                <div class="font-mono-tech text-[var(--muted)] mb-2">SHIPPED</div>
+                <p class="font-mono-tech leading-loose text-[var(--fg)]">
+                  FLUTTER / DART / EXPO<br />
+                  TYPESCRIPT / FIREBASE<br />
+                  PDF-TO-DXF CAD TOOLS
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. KINETIC FOOTER & MAGNETIC CONTACT
+       ========================================================================= -->
+  <footer class="hairline-t mt-12">
+    <div class="mx-auto max-w-[1440px] px-4 sm:px-8 pt-16 sm:pt-24 pb-10">
+      <div class="font-mono-tech text-[var(--muted)] mb-4">03 / INITIATE DIALOGUE</div>
+
+      <!-- Massive Edge-to-Edge Interactive CTA -->
+      <div class="py-4">
+        <button
+          id="footer-email-cta"
+          type="button"
+          class="footer-cta magnetic font-syne font-extrabold uppercase text-left"
+          title="Click to copy email address"
+        >
+          LET'S <span class="font-serif-ed italic font-normal lowercase">build</span> &nearr;
+        </button>
+      </div>
+
+      <div class="mt-12 sm:mt-20 pt-6 hairline-t flex flex-col gap-6 md:flex-row md:items-center md:justify-between font-mono-tech">
+        <div class="flex flex-wrap items-center gap-6 text-[var(--muted)]">
+          <button type="button" onclick="copyEmail()" class="magnetic text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+            ANGEL.MACWAN@PROTON.ME [COPY]
+          </button>
+          <a href="#works" onclick="showToast('OPENING GITHUB / @ANGELMACWAN'); return false;" class="magnetic hover:text-[var(--fg)] transition-colors">GITHUB</a>
+          <a href="#works" onclick="showToast('OPENING GOOGLE SCHOLAR PROFILE'); return false;" class="magnetic hover:text-[var(--fg)] transition-colors">SCHOLAR</a>
+          <a href="#works" onclick="showToast('OPENING LINKEDIN PROFILE'); return false;" class="magnetic hover:text-[var(--fg)] transition-colors">LINKEDIN</a>
+          <a href="#works" onclick="showToast('OPENING X / TWITTER PROFILE'); return false;" class="magnetic hover:text-[var(--fg)] transition-colors">X / TWITTER</a>
+        </div>
+
+        <div class="flex items-center justify-between md:justify-end gap-8 text-[var(--muted)]">
+          <span>&copy; 2026 ANGEL MACWAN</span>
+          <button type="button" id="btn-back-top" class="magnetic text-[var(--fg)] hover:text-[var(--accent)] transition-colors">
+            BACK TO TOP &uarr;
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       6. FULL-SCREEN EDITORIAL CASE STUDY TAKEOVER OVERLAY
+       ========================================================================= -->
+  <div id="case-takeover" role="dialog" aria-modal="true" aria-hidden="true">
+    <!-- Sticky Takeover Bar -->
+    <div class="sticky top-0 z-20 flex h-14 items-center justify-between px-4 sm:px-8 hairline-b bg-[var(--bg)]/90 backdrop-blur-md">
+      <div class="flex items-center gap-4 font-mono-tech">
+        <span id="cs-index" class="text-[var(--accent)]">01</span>
+        <span class="text-[var(--muted)]">/ CASE STUDY</span>
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-5">
+        <button id="cs-prev" type="button" class="magnetic font-mono-tech text-[var(--muted)] hover:text-[var(--fg)] transition-colors">
+          &larr; PREV
+        </button>
+        <button id="cs-next" type="button" class="magnetic font-mono-tech text-[var(--muted)] hover:text-[var(--fg)] transition-colors">
+          NEXT &rarr;
+        </button>
+        <button id="cs-close" type="button" class="magnetic hairline-all px-3 py-1.5 font-mono-tech text-[var(--fg)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors">
+          CLOSE [ESC]
+        </button>
+      </div>
+    </div>
+
+    <!-- Takeover Content -->
+    <div class="mx-auto max-w-[1320px] px-4 sm:px-8 py-12 sm:py-16">
+      <!-- Giant Case Study Title -->
+      <h2 id="cs-title" class="font-syne text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight leading-[0.95]"></h2>
+
+      <!-- Metadata Grid -->
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 py-6 hairline-t hairline-b font-mono-tech">
+        <div>
+          <div class="text-[var(--muted)] mb-1.5">ROLE</div>
+          <div id="cs-role" class="text-[var(--fg)]"></div>
+        </div>
+        <div>
+          <div class="text-[var(--muted)] mb-1.5">DOMAIN</div>
+          <div id="cs-domain" class="text-[var(--fg)]"></div>
+        </div>
+        <div>
+          <div class="text-[var(--muted)] mb-1.5">STACK</div>
+          <div id="cs-stack" class="text-[var(--fg)]"></div>
+        </div>
+        <div>
+          <div class="text-[var(--muted)] mb-1.5">YEAR</div>
+          <div id="cs-year" class="text-[var(--fg)]"></div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE MINI-PLAYGROUND CANVAS INSIDE CASE STUDY -->
+      <div class="mt-10 hairline-all bg-[#0B0B0C] text-[#F0EDE6]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 sm:px-6 py-3.5 border-b border-white/15">
+          <div class="flex items-center gap-2.5 font-mono-tech">
+            <span class="h-2 w-2 rounded-full bg-[#FF3B00]"></span>
+            <span id="pg-title">INTERACTIVE PLAYGROUND</span>
+          </div>
+          <!-- Dynamic Controls Container -->
+          <div id="pg-controls" class="flex flex-wrap items-center gap-4 font-mono-tech text-[10px]"></div>
+        </div>
+        <div class="relative w-full h-[300px] sm:h-[380px] overflow-hidden" id="pg-canvas-wrap">
+          <canvas id="playground-canvas" class="block w-full h-full"></canvas>
+          <div id="pg-telemetry" class="absolute bottom-3 left-4 right-4 flex justify-between font-mono-tech text-[10px] text-[#F0EDE6]/70 pointer-events-none"></div>
+        </div>
+      </div>
+
+      <!-- Crisp Architectural Breakdown -->
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 pb-16">
+        <div>
+          <div class="font-mono-tech text-[var(--accent)] mb-3">01 / CONTEXT</div>
+          <p id="cs-context" class="text-sm sm:text-base leading-relaxed text-[var(--fg)]/85"></p>
+        </div>
+        <div>
+          <div class="font-mono-tech text-[var(--accent)] mb-3">02 / ENGINEERING &amp; RESEARCH CRAFT</div>
+          <p id="cs-craft" class="text-sm sm:text-base leading-relaxed text-[var(--fg)]/85"></p>
+        </div>
+        <div>
+          <div class="font-mono-tech text-[var(--accent)] mb-3">03 / IMPACT</div>
+          <p id="cs-impact" class="text-sm sm:text-base leading-relaxed text-[var(--fg)]/85"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimal Mono Toast -->
+  <div id="mono-toast" class="font-mono-tech" role="status" aria-live="polite">
+    COPIED TO CLIPBOARD
+  </div>
+
+  <!-- =========================================================================
+       KINETIC ENGINE (PURE 60FPS VANILLA JS — ZERO EXTERNAL DEPENDENCIES)
+       ========================================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* -----------------------------------------------------------------------
+         GLOBAL STATE & PROJECT DATA
+         ----------------------------------------------------------------------- */
+      const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+      let isLightMode = false;
+
+      const mouse = {
+        x: window.innerWidth * 0.5,
+        y: window.innerHeight * 0.5,
+        vx: 0,
+        vy: 0,
+        lastX: window.innerWidth * 0.5,
+        lastY: window.innerHeight * 0.5
+      };
+
+      const PROJECTS = [
+        {
+          index: '01',
+          title: 'ENTERPRISE DATA MESH',
+          role: 'Data Engineer @ IBM',
+          domain: 'Enterprise Data Engineering',
+          stack: 'Snowflake · Python · SQL · Databricks',
+          year: '2025',
+          previewMeta: 'SNOWFLAKE SNAPSHOT TOPOLOGY',
+          pgTitle: 'LIVE PIPELINE SIMULATOR — INJECT TRAFFIC & TUNE CADENCE',
+          context:
+            'Large enterprise analytics organizations routinely struggle with fragmented data copies, drift between business units, and brittle ad-hoc ETL jobs. At IBM, teams needed isolated yet centrally governed data environments.',
+          craft:
+            'Engineered metadata-driven Enablement Zones backed by automated zero-copy Snowflake snapshot pipelines. Declarative governance tables enforce RBAC, schema contracts, and freshness SLAs automatically across multi-team shares.',
+          impact:
+            'Eliminated redundant manual pipeline orchestration, accelerated downstream ML & BI onboarding, and established auditable end-to-end lineage across enterprise domains.'
+        },
+        {
+          index: '02',
+          title: 'OCULAR MORPHOMETRICS AI',
+          role: 'Data Scientist & Researcher',
+          domain: 'Computational Biology & Clinical CV',
+          stack: 'PyTorch · SegFormer · OpenCV · SciPy',
+          year: '2025',
+          previewMeta: 'IR MEIBOGRAPHY SEGFORMER MASK',
+          pgTitle: 'CLINICAL VISION SCANNER — ADJUST CONFIDENCE THRESHOLD',
+          context:
+            'Meibomian Gland Dysfunction is a leading cause of dry-eye disease, yet clinical grading of infrared eyelid meibography remains largely subjective and time-consuming for ophthalmologists.',
+          craft:
+            'Trained hierarchical SegFormer vision transformers to segment individual gland structures at sub-millimeter precision, paired with medial-axis skeletonization to compute continuous tortuosity, length, and dropout density biomarkers.',
+          impact:
+            'Achieved 0.89 IoU with sub-second per-scan inference, transforming qualitative imaging into reproducible quantitative vectors for clinical research.'
+        },
+        {
+          index: '03',
+          title: 'KIPPO COMPANION',
+          role: 'Founder & Mobile Engineer',
+          domain: 'Indie iOS App & Applied AI',
+          stack: 'Flutter · Dart · Firebase · StoreKit 2',
+          year: '2026',
+          previewMeta: 'IOS AMBIENT ORB · LEO ENGINE',
+          pgTitle: 'KIPPO AMBIENT ORB — TAP MOOD STATES TO MORPH HARMONICS',
+          context:
+            'Most mental-wellness and journaling apps feel clinical or bloated with forms. Kippo reimagines daily reflection as a quiet, tactile interaction with Leo—an ambient AI companion that responds emotionally and grows with you.',
+          craft:
+            'Crafted a fluid 60fps Flutter interface with custom reactive visualizers, native StoreKit 2 subscription entitlements, and an offline-first Firebase sync layer orchestrating context-aware AI prompts.',
+          impact:
+            'Shipped end-to-end from concept and motion design to iOS production, blending consumer craft with real-time generative feedback.'
+        },
+        {
+          index: '04',
+          title: 'BIOVISION & MULTI-PLATFORM LAB',
+          role: 'Researcher & Systems Builder',
+          domain: 'Deep Learning, Mobile & CAD Tooling',
+          stack: 'PyTorch · VOLO-D5 · BERT · React Native · C++',
+          year: '2026',
+          previewMeta: 'NEURAL ATTENTION & PARTICLE FIELD',
+          pgTitle: 'ATTENTION FIELD SANDBOX — MOVE CURSOR OR PERTURB WEIGHTS',
+          context:
+            'Curiosity rarely fits inside a single discipline. This ongoing lab houses experimental work spanning Gram-stain bacterial microscopy classification (VOLO-D5-512), biomedical disease-gene BERT text mining, and native C++ PDF-to-DXF geometry converters.',
+          craft:
+            'Combines high-resolution vision backbones, biomedical NER/relation-extraction pipelines, and cross-platform React Native / Expo prototypes into modular, fast-iterating engineering artifacts.',
+          impact:
+            'Reached 96.4% top-1 accuracy on bacterial microscopy benchmarks while continuously feeding new systems patterns back into daily production work.'
+        }
+      ];
+
+      /* -----------------------------------------------------------------------
+         1. PRELOADER CURTAIN (~900ms)
+         ----------------------------------------------------------------------- */
+      function runPreloader() {
+        const preloader = document.getElementById('preloader');
+        const countEl = document.getElementById('preloader-count');
+        const barEl = document.getElementById('preloader-bar');
+        const duration = 880;
+        const start = performance.now();
+
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic for snappy deceleration into 100
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const val = Math.floor(eased * 100);
+          countEl.textContent = String(val).padStart(2, '0');
+          barEl.style.width = `${eased * 100}%`;
+
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            countEl.textContent = '100';
+            barEl.style.width = '100%';
+            setTimeout(() => {
+              preloader.classList.add('is-done');
+              preloader.setAttribute('aria-hidden', 'true');
+              document.body.classList.add('is-ready');
+            }, 90);
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      /* -----------------------------------------------------------------------
+         2. LIVE TELEMETRY (LOCAL CLOCK, COORDS, SCROLL %)
+         ----------------------------------------------------------------------- */
+      const clockEl = document.getElementById('live-clock');
+      const coordsEl = document.getElementById('live-coords');
+      const scrollEl = document.getElementById('live-scroll');
+
+      function updateClock() {
+        try {
+          const now = new Date();
+          const formatter = new Intl.DateTimeFormat(undefined, {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          });
+          const tz = new Intl.DateTimeFormat(undefined, { timeZoneName: 'short' })
+            .formatToParts(now)
+            .find(p => p.type === 'timeZoneName')?.value;
+          if (clockEl) clockEl.textContent = tz ? `${formatter.format(now)} ${tz}` : formatter.format(now);
+        } catch (e) {
+          const d = new Date();
+          if (clockEl) clockEl.textContent = d.toTimeString().slice(0, 8);
+        }
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      let lastScrollY = window.scrollY;
+      let scrollVelocity = 0;
+
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        scrollVelocity = y - lastScrollY;
+        lastScrollY = y;
+
+        const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        const pct = Math.min(100, Math.max(0, Math.round((y / maxScroll) * 100)));
+        if (scrollEl) scrollEl.textContent = `${String(pct).padStart(2, '0')}%`;
+      }, { passive: true });
+
+      /* -----------------------------------------------------------------------
+         3. INVERT MODE TOGGLE
+         ----------------------------------------------------------------------- */
+      const btnInvert = document.getElementById('btn-invert');
+      btnInvert.addEventListener('click', () => {
+        isLightMode = !isLightMode;
+        document.documentElement.setAttribute('data-mode', isLightMode ? 'light' : 'dark');
+        showToast(isLightMode ? 'POLARITY: GALLERY PAPER' : 'POLARITY: OBSIDIAN INK');
+      });
+
+      /* -----------------------------------------------------------------------
+         4. CUSTOM MAGNETIC CURSOR & MAGNETIC ELEMENTS
+         ----------------------------------------------------------------------- */
+      const cursorDot = document.getElementById('cursor-dot');
+      const cursorRing = document.getElementById('cursor-ring');
+      const cursorLabel = document.getElementById('cursor-label');
+      const ringPos = { x: mouse.x, y: mouse.y };
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.vx = e.clientX - mouse.lastX;
+        mouse.vy = e.clientY - mouse.lastY;
+        mouse.lastX = mouse.x;
+        mouse.lastY = mouse.y;
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+
+        if (coordsEl) {
+          coordsEl.textContent = `X: ${String(Math.round(mouse.x)).padStart(4, '0')}  Y: ${String(Math.round(mouse.y)).padStart(4, '0')}`;
+        }
+      });
+
+      function setupMagneticElements() {
+        if (isTouchDevice) return;
+
+        document.querySelectorAll('.magnetic').forEach((el) => {
+          el.addEventListener('mouseenter', () => {
+            cursorRing.classList.add('is-hover-link');
+          });
+          el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.22;
+            const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.22;
+            el.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+          });
+          el.addEventListener('mouseleave', () => {
+            el.style.transform = 'translate3d(0, 0, 0)';
+            cursorRing.classList.remove('is-hover-link');
+          });
+        });
+
+        // Playground canvas cursor state
+        const pgWrap = document.getElementById('pg-canvas-wrap');
+        if (pgWrap) {
+          pgWrap.addEventListener('mouseenter', () => {
+            cursorRing.classList.add('is-pill-open');
+            cursorLabel.textContent = 'OPEN';
+            cursorDot.style.opacity = '0';
+          });
+          pgWrap.addEventListener('mouseleave', () => {
+            cursorRing.classList.remove('is-pill-open');
+            cursorLabel.textContent = '';
+            cursorDot.style.opacity = '1';
+          });
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+         5. VELOCITY-REACTIVE MARQUEE
+         ----------------------------------------------------------------------- */
+      const marqueeTrack = document.getElementById('marquee-track');
+      let marqueeX = 0;
+
+      function updateMarquee() {
+        if (!marqueeTrack) return;
+        const speed = 0.65 + Math.min(Math.abs(scrollVelocity) * 0.18, 9);
+        const dir = scrollVelocity < -2 ? -1 : 1;
+        marqueeX -= speed * dir;
+        const singleWidth = marqueeTrack.scrollWidth / 3;
+        if (marqueeX <= -singleWidth) marqueeX += singleWidth;
+        if (marqueeX > 0) marqueeX -= singleWidth;
+        marqueeTrack.style.transform = `translate3d(${marqueeX}px, 0, 0)`;
+        scrollVelocity *= 0.9;
+      }
+
+      /* -----------------------------------------------------------------------
+         6. LIVING GENERATIVE HERO CANVAS (SPRING-PHYSICS FLOW TOPOLOGY)
+         ----------------------------------------------------------------------- */
+      const heroCanvas = document.getElementById('hero-canvas');
+      const heroCtx = heroCanvas.getContext('2d');
+      let heroW = 0, heroH = 0, heroDpr = 1;
+      const heroNodes = [];
+
+      function resizeHeroCanvas() {
+        const rect = heroCanvas.parentElement.getBoundingClientRect();
+        heroW = rect.width;
+        heroH = rect.height;
+        heroDpr = Math.min(window.devicePixelRatio || 1, 2);
+        heroCanvas.width = Math.floor(heroW * heroDpr);
+        heroCanvas.height = Math.floor(heroH * heroDpr);
+        heroCtx.setTransform(heroDpr, 0, 0, heroDpr, 0, 0);
+
+        // Seed subtle floating topology/bio nodes
+        heroNodes.length = 0;
+        const nodeCount = heroW < 640 ? 16 : 28;
+        for (let i = 0; i < nodeCount; i++) {
+          heroNodes.push({
+            bx: Math.random() * heroW,
+            by: Math.random() * heroH,
+            x: 0,
+            y: 0,
+            vx: 0,
+            vy: 0,
+            phase: Math.random() * Math.PI * 2,
+            r: 1.5 + Math.random() * 1.8
+          });
+        }
+      }
+
+      // Smooth spring-tracked pointer for hero wave deformation
+      const heroPtr = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.4, vx: 0, vy: 0 };
+
+      function drawHeroCanvas(t) {
+        if (!heroW || !heroH) return;
+        const time = t * 0.00055;
+
+        // Spring physics toward mouse
+        const fx = (mouse.x - heroPtr.x) * 0.08;
+        const fy = (mouse.y - heroPtr.y) * 0.08;
+        heroPtr.vx = (heroPtr.vx + fx) * 0.78;
+        heroPtr.vy = (heroPtr.vy + fy) * 0.78;
+        heroPtr.x += heroPtr.vx;
+        heroPtr.y += heroPtr.vy;
+
+        heroCtx.clearRect(0, 0, heroW, heroH);
+
+        const lineColor = isLightMode ? 'rgba(11, 11, 12,' : 'rgba(240, 237, 230,';
+        const rows = heroW < 640 ? 14 : 20;
+        const cols = heroW < 640 ? 28 : 54;
+        const stepX = heroW / (cols - 1);
+        const stepY = (heroH * 0.92) / (rows - 1);
+
+        // Flowing topographic / cellular contour lines
+        for (let r = 0; r < rows; r++) {
+          const baseY = r * stepY + heroH * 0.04;
+          heroCtx.beginPath();
+
+          for (let c = 0; c < cols; c++) {
+            const x = c * stepX;
+            const nx = c * 0.14;
+            const ny = r * 0.34;
+
+            // Organic cellular contour wave
+            let wave =
+              Math.sin(nx + time * 1.4 + ny * 0.7) * 16 +
+              Math.cos(nx * 0.55 - time * 0.9 + ny) * 11;
+
+            // Interactive mouse ripple & bend
+            const dx = x - heroPtr.x;
+            const dy = (baseY + wave) - heroPtr.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const radius = 240;
+            if (dist < radius) {
+              const force = Math.pow(1 - dist / radius, 2);
+              const ripple = Math.sin(dist * 0.045 - time * 5) * 14 * force;
+              wave += ripple + (dy / (dist + 1)) * 28 * force;
+            }
+
+            const y = baseY + wave;
+            if (c === 0) heroCtx.moveTo(x, y);
+            else heroCtx.lineTo(x, y);
+          }
+
+          const alpha = (r % 4 === 0) ? 0.16 : 0.065;
+          heroCtx.strokeStyle = `${lineColor} ${alpha})`;
+          heroCtx.lineWidth = (r % 4 === 0) ? 1.15 : 0.75;
+          heroCtx.stroke();
+        }
+
+        // Subtle data-topology nodes with spring repulsion & vermilion proximity links
+        for (let i = 0; i < heroNodes.length; i++) {
+          const n = heroNodes[i];
+          const targetX = n.bx + Math.sin(time * 1.3 + n.phase) * 26;
+          const targetY = n.by + Math.cos(time * 1.1 + n.phase) * 22;
+
+          let pushX = 0, pushY = 0;
+          const mdx = targetX - heroPtr.x;
+          const mdy = targetY - heroPtr.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mdist < 190) {
+            const f = (1 - mdist / 190) * 42;
+            pushX = (mdx / (mdist + 1)) * f;
+            pushY = (mdy / (mdist + 1)) * f;
+          }
+
+          n.x = targetX + pushX;
+          n.y = targetY + pushY;
+
+          // Connect nearby nodes
+          for (let j = i + 1; j < heroNodes.length; j++) {
+            const m = heroNodes[j];
+            const d = Math.hypot(n.x - m.x, n.y - m.y);
+            if (d < 145) {
+              const a = (1 - d / 145) * 0.16;
+              heroCtx.beginPath();
+              heroCtx.moveTo(n.x, n.y);
+              heroCtx.lineTo(m.x, m.y);
+              heroCtx.strokeStyle = d < 75 ? `rgba(255, 59, 0, ${a * 1.6})` : `${lineColor} ${a})`;
+              heroCtx.lineWidth = 0.8;
+              heroCtx.stroke();
+            }
+          }
+
+          heroCtx.beginPath();
+          heroCtx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          heroCtx.fillStyle = mdist < 150 ? '#FF3B00' : `${lineColor} 0.35)`;
+          heroCtx.fill();
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+         7. PROCEDURAL PROJECT RENDERERS (USED BY BOTH FLOATING PREVIEW & PLAYGROUND)
+         ----------------------------------------------------------------------- */
+      // Interactive state for the Case Study Playgrounds
+      const pgState = {
+        // 01: Enterprise Data Mesh
+        burstPackets: [],
+        cadence: 1.0,
+        // 02: Ocular Morphometrics
+        confThreshold: 0.62,
+        showVectors: true,
+        // 03: Kippo Companion
+        mood: 'calm',
+        // 04: BioVision Attention Lab
+        temperature: 0.55,
+        perturbForce: 0,
+        localMouseX: -999,
+        localMouseY: -999
+      };
+
+      const MOOD_PALETTES = {
+        calm:    { c1: '#FF3B00', c2: '#F0EDE6', speed: 0.8, amp: 14, label: 'CALM · 62 BPM' },
+        focused: { c1: '#38BDF8', c2: '#F0EDE6', speed: 1.5, amp: 8,  label: 'FOCUSED · 74 BPM' },
+        curious: { c1: '#F59E0B', c2: '#FF3B00', speed: 1.25, amp: 20, label: 'CURIOUS · 80 BPM' },
+        restore: { c1: '#10B981', c2: '#F0EDE6', speed: 0.55, amp: 11, label: 'RESTORE · 56 BPM' }
+      };
+
+      // Shared procedural renderer for all 4 projects
+      function renderProjectVisual(ctx, w, h, projectIdx, t, isPlayground) {
+        const time = t * 0.001;
+        ctx.fillStyle = '#0B0B0C';
+        ctx.fillRect(0, 0, w, h);
+
+        // Subtle technical micro-grid
+        ctx.strokeStyle = 'rgba(240, 237, 230, 0.05)';
+        ctx.lineWidth = 1;
+        const gStep = isPlayground ? 36 : 24;
+        for (let x = gStep; x < w; x += gStep) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+        }
+        for (let y = gStep; y < h; y += gStep) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+        }
+
+        if (projectIdx === 0) {
+          // 01 — ENTERPRISE DATA MESH (IBM · Snowflake Snapshot Topology)
+          const nodes = [
+            { x: w * 0.14, y: h * 0.30, label: 'SRC-A' },
+            { x: w * 0.14, y: h * 0.70, label: 'SRC-B' },
+            { x: w * 0.40, y: h * 0.50, label: 'GOV-DB', accent: true },
+            { x: w * 0.66, y: h * 0.32, label: 'SNAP-01' },
+            { x: w * 0.66, y: h * 0.68, label: 'SNAP-02' },
+            { x: w * 0.88, y: h * 0.50, label: 'ZONE' }
+          ];
+          const edges = [[0,2],[1,2],[2,3],[2,4],[3,5],[4,5]];
+
+          // Draw edges
+          edges.forEach(([a, b], idx) => {
+            const n1 = nodes[a], n2 = nodes[b];
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.strokeStyle = 'rgba(240, 237, 230, 0.22)';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+
+            // Continuous pulsing packets
+            const speed = isPlayground ? pgState.cadence : 0.9;
+            const p = ((time * 0.55 * speed + idx * 0.23) % 1);
+            const px = n1.x + (n2.x - n1.x) * p;
+            const py = n1.y + (n2.y - n1.y) * p;
+            ctx.beginPath();
+            ctx.arc(px, py, isPlayground ? 3.5 : 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = idx % 2 === 0 ? '#FF3B00' : '#F0EDE6';
+            ctx.fill();
+          });
+
+          // Burst packets injected by user in playground
+          if (isPlayground && pgState.burstPackets.length > 0) {
+            for (let i = pgState.burstPackets.length - 1; i >= 0; i--) {
+              const bp = pgState.burstPackets[i];
+              bp.p += 0.022 * pgState.cadence;
+              if (bp.p >= 1) {
+                pgState.burstPackets.splice(i, 1);
+                continue;
+              }
+              const [a, b] = edges[bp.edge];
+              const n1 = nodes[a], n2 = nodes[b];
+              const px = n1.x + (n2.x - n1.x) * bp.p;
+              const py = n1.y + (n2.y - n1.y) * bp.p;
+              ctx.beginPath();
+              ctx.arc(px, py, 5, 0, Math.PI * 2);
+              ctx.fillStyle = '#FF3B00';
+              ctx.fill();
+            }
+          }
+
+          // Draw nodes
+          nodes.forEach((n) => {
+            const pulse = 1 + Math.sin(time * 3 + n.x) * 0.14;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, (isPlayground ? 16 : 10) * pulse, 0, Math.PI * 2);
+            ctx.strokeStyle = n.accent ? 'rgba(255, 59, 0, 0.45)' : 'rgba(240, 237, 230, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, isPlayground ? 6 : 4, 0, Math.PI * 2);
+            ctx.fillStyle = n.accent ? '#FF3B00' : '#F0EDE6';
+            ctx.fill();
+
+            if (isPlayground) {
+              ctx.fillStyle = 'rgba(240, 237, 230, 0.72)';
+              ctx.font = '10px "JetBrains Mono", monospace';
+              ctx.textAlign = 'center';
+              ctx.fillText(n.label, n.x, n.y + 28);
+            }
+          });
+        } else if (projectIdx === 1) {
+          // 02 — OCULAR MORPHOMETRICS AI (Biological Gland Contours + Reticle)
+          const thresh = isPlayground ? pgState.confThreshold : 0.55;
+          const showVec = isPlayground ? pgState.showVectors : true;
+
+          // Eyelid ROI arch
+          ctx.beginPath();
+          ctx.moveTo(w * 0.12, h * 0.78);
+          ctx.bezierCurveTo(w * 0.28, h * 0.12, w * 0.72, h * 0.12, w * 0.88, h * 0.78);
+          ctx.quadraticCurveTo(w * 0.5, h * 0.88, w * 0.12, h * 0.78);
+          ctx.strokeStyle = 'rgba(240, 237, 230, 0.28)';
+          ctx.setLineDash([4, 4]);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // 11 procedural Meibomian glands with confidence scores
+          const glands = 11;
+          for (let i = 0; i < glands; i++) {
+            const frac = (i + 0.5) / glands;
+            const gx = w * (0.20 + frac * 0.60);
+            const archTop = h * (0.28 + Math.pow((frac - 0.5) * 2, 2) * 0.26);
+            const archBot = h * 0.76;
+            const conf = 0.42 + Math.abs(Math.sin(i * 1.7 + 0.4)) * 0.55;
+            const active = conf >= thresh;
+
+            ctx.beginPath();
+            const steps = 14;
+            for (let s = 0; s <= steps; s++) {
+              const p = s / steps;
+              const y = archTop + (archBot - archTop) * p;
+              const bend = Math.sin(p * Math.PI * 2.4 + i + time * 0.8) * (isPlayground ? 8 : 5);
+              const x = gx + bend;
+              if (s === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = active ? 'rgba(255, 59, 0, 0.85)' : 'rgba(240, 237, 230, 0.14)';
+            ctx.lineWidth = active ? (isPlayground ? 5.5 : 3.5) : 2;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+
+            // Tortuosity vector overlay
+            if (active && showVec) {
+              ctx.beginPath();
+              ctx.moveTo(gx, archTop);
+              ctx.lineTo(gx, archBot);
+              ctx.strokeStyle = 'rgba(240, 237, 230, 0.55)';
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+
+          // Scanning horizontal reticle
+          const scanY = h * 0.18 + ((Math.sin(time * 1.6) + 1) * 0.5) * (h * 0.64);
+          ctx.beginPath();
+          ctx.moveTo(w * 0.08, scanY);
+          ctx.lineTo(w * 0.92, scanY);
+          ctx.strokeStyle = 'rgba(255, 59, 0, 0.7)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        } else if (projectIdx === 2) {
+          // 03 — KIPPO COMPANION (Minimal Dark-Glass iOS Silhouette + Breathing Orb)
+          const pal = isPlayground ? MOOD_PALETTES[pgState.mood] : MOOD_PALETTES.calm;
+          const cx = w * 0.5;
+          const cy = h * 0.5;
+
+          // Minimal iOS glass silhouette frame
+          const phoneH = h * 0.78;
+          const phoneW = phoneH * 0.52;
+          ctx.strokeStyle = 'rgba(240, 237, 230, 0.25)';
+          ctx.lineWidth = 1.2;
+          ctx.strokeRect(cx - phoneW / 2, cy - phoneH / 2, phoneW, phoneH);
+
+          // Organic breathing ambient orb
+          const baseR = Math.min(phoneW, phoneH) * 0.28;
+          const layers = 5;
+          for (let l = 0; l < layers; l++) {
+            ctx.beginPath();
+            const pts = 48;
+            for (let p = 0; p <= pts; p++) {
+              const ang = (p / pts) * Math.PI * 2;
+              const wobble =
+                Math.sin(ang * 3 + time * pal.speed * 2 + l) * (pal.amp * 0.35) +
+                Math.cos(ang * 5 - time * pal.speed * 1.4) * (pal.amp * 0.2);
+              const r = baseR + l * 6 + wobble;
+              const x = cx + Math.cos(ang) * r;
+              const y = cy - phoneH * 0.06 + Math.sin(ang) * r;
+              if (p === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.strokeStyle = l === 0 ? pal.c1 : `rgba(240, 237, 230, ${0.42 - l * 0.07})`;
+            ctx.lineWidth = l === 0 ? 1.8 : 1;
+            ctx.stroke();
+          }
+
+          // Smooth waveform pulses along bottom of device
+          ctx.beginPath();
+          const waveY = cy + phoneH * 0.28;
+          const waveW = phoneW * 0.72;
+          for (let i = 0; i <= 32; i++) {
+            const f = i / 32;
+            const x = cx - waveW / 2 + f * waveW;
+            const env = Math.sin(f * Math.PI);
+            const y = waveY + Math.sin(f * 14 - time * pal.speed * 5) * pal.amp * 0.45 * env;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = pal.c1;
+          ctx.lineWidth = 1.6;
+          ctx.stroke();
+        } else {
+          // 04 — BIOVISION & MULTI-PLATFORM LAB (Interactive Neural Attention Matrix)
+          const cols = isPlayground ? 18 : 12;
+          const rows = isPlayground ? 10 : 7;
+          const padX = w * 0.1;
+          const padY = h * 0.14;
+          const cellW = (w - padX * 2) / (cols - 1);
+          const cellH = (h - padY * 2) / (rows - 1);
+          const temp = isPlayground ? pgState.temperature : 0.55;
+
+          if (pgState.perturbForce > 0.01) pgState.perturbForce *= 0.94;
+
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              let x = padX + c * cellW;
+              let y = padY + r * cellH;
+
+              const wave = Math.sin(c * 0.55 + time * 1.9) * Math.cos(r * 0.65 - time * 1.4);
+              let weight = (wave + 1) * 0.5;
+
+              // Interactive mouse attraction / attention focus in playground
+              if (isPlayground && pgState.localMouseX > 0) {
+                const dx = x - pgState.localMouseX;
+                const dy = y - pgState.localMouseY;
+                const dist = Math.hypot(dx, dy);
+                if (dist < 140) {
+                  const boost = 1 - dist / 140;
+                  weight = Math.min(1, weight + boost * 0.8);
+                  x += (dx / (dist + 1)) * boost * 10;
+                  y += (dy / (dist + 1)) * boost * 10;
+                }
+              }
+
+              // Perturbation shockwave
+              if (isPlayground && pgState.perturbForce > 0.02) {
+                x += Math.sin(r * 3 + time * 12) * 14 * pgState.perturbForce;
+                y += Math.cos(c * 3 + time * 12) * 14 * pgState.perturbForce;
+              }
+
+              const size = (isPlayground ? 2.2 : 1.6) + weight * (isPlayground ? 7.5 : 4.5) * temp;
+              const isHot = weight > 0.72;
+              ctx.fillStyle = isHot ? '#FF3B00' : `rgba(240, 237, 230, ${0.18 + weight * 0.6})`;
+              ctx.fillRect(x - size / 2, y - size / 2, size, size);
+            }
+          }
+        }
+      }
+
+      /* -----------------------------------------------------------------------
+         8. FLOATING CURSOR-TRACKED PREVIEW STAGE (WITH 3D VELOCITY TILT)
+         ----------------------------------------------------------------------- */
+      const previewStage = document.getElementById('preview-stage');
+      const previewCanvas = document.getElementById('preview-canvas');
+      const previewCtx = previewCanvas.getContext('2d');
+      const previewMetaLeft = document.getElementById('preview-meta-left');
+
+      let activeHoverProject = -1;
+      const stagePos = { x: 0, y: 0, rotZ: 0, rotY: 0 };
+
+      function initPreviewCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        previewCanvas.width = 360 * dpr;
+        previewCanvas.height = 230 * dpr;
+        previewCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      document.querySelectorAll('.work-row').forEach((row) => {
+        const idx = parseInt(row.dataset.project, 10);
+
+        row.addEventListener('mouseenter', () => {
+          activeHoverProject = idx;
+          if (!isTouchDevice) {
+            previewMetaLeft.textContent = PROJECTS[idx].previewMeta;
+            previewStage.classList.add('is-visible');
+            cursorRing.classList.add('is-pill');
+            cursorLabel.textContent = 'VIEW ↗';
+            cursorDot.style.opacity = '0';
+          }
+        });
+
+        row.addEventListener('mouseleave', () => {
+          activeHoverProject = -1;
+          previewStage.classList.remove('is-visible');
+          cursorRing.classList.remove('is-pill');
+          cursorLabel.textContent = '';
+          cursorDot.style.opacity = '1';
+        });
+
+        row.addEventListener('click', () => openCaseStudy(idx));
+        row.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openCaseStudy(idx);
+          }
+        });
+      });
+
+      /* -----------------------------------------------------------------------
+         9. DISCIPLINE FILTER BAR
+         ----------------------------------------------------------------------- */
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const workRows = document.querySelectorAll('.work-row');
+
+      function applyFilter(cat) {
+        filterBtns.forEach((btn) => {
+          const active = btn.dataset.filter === cat;
+          btn.setAttribute('aria-selected', active ? 'true' : 'false');
+          btn.style.backgroundColor = active ? 'var(--fg)' : 'transparent';
+          btn.style.color = active ? 'var(--bg)' : 'var(--muted)';
+          btn.style.borderColor = active ? 'var(--fg)' : 'var(--hairline)';
+        });
+
+        workRows.forEach((row) => {
+          const match = cat === 'all' || row.dataset.category === cat;
+          row.style.display = match ? '' : 'none';
+        });
+      }
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+      });
+      applyFilter('all');
+
+      /* -----------------------------------------------------------------------
+         10. FULL-SCREEN CASE STUDY TAKEOVER & INTERACTIVE PLAYGROUND
+         ----------------------------------------------------------------------- */
+      const caseTakeover = document.getElementById('case-takeover');
+      const pgCanvas = document.getElementById('playground-canvas');
+      const pgCtx = pgCanvas.getContext('2d');
+      const pgControls = document.getElementById('pg-controls');
+      const pgTelemetry = document.getElementById('pg-telemetry');
+      let openProjectIdx = -1;
+      let pgW = 0, pgH = 0;
+
+      function resizePlaygroundCanvas() {
+        if (openProjectIdx < 0) return;
+        const rect = pgCanvas.parentElement.getBoundingClientRect();
+        pgW = rect.width;
+        pgH = rect.height;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        pgCanvas.width = Math.floor(pgW * dpr);
+        pgCanvas.height = Math.floor(pgH * dpr);
+        pgCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function buildPlaygroundControls(idx) {
+        pgControls.innerHTML = '';
+        if (idx === 0) {
+          pgControls.innerHTML = `
+            <button type="button" id="pg-btn-burst" class="border border-[#FF3B00] bg-[#FF3B00] text-white px-3 py-1 hover:opacity-90">
+              + INJECT BURST TRAFFIC
+            </button>
+            <label class="flex items-center gap-2 text-[#F0EDE6]/80">
+              CADENCE
+              <input id="pg-rng-cadence" type="range" min="0.4" max="2.4" step="0.1" value="${pgState.cadence}" class="studio-range w-24" />
+            </label>
+          `;
+          document.getElementById('pg-btn-burst').addEventListener('click', () => {
+            for (let i = 0; i < 6; i++) {
+              pgState.burstPackets.push({ edge: i % 6, p: Math.random() * 0.15 });
+            }
+          });
+          document.getElementById('pg-rng-cadence').addEventListener('input', (e) => {
+            pgState.cadence = parseFloat(e.target.value);
+          });
+        } else if (idx === 1) {
+          pgControls.innerHTML = `
+            <label class="flex items-center gap-2 text-[#F0EDE6]/80">
+              CONFIDENCE <span id="pg-conf-val" class="text-[#FF3B00]">${pgState.confThreshold.toFixed(2)}</span>
+              <input id="pg-rng-conf" type="range" min="0.30" max="0.95" step="0.01" value="${pgState.confThreshold}" class="studio-range w-28" />
+            </label>
+            <button type="button" id="pg-btn-vec" class="border border-white/25 px-3 py-1 text-[#F0EDE6] hover:border-[#FF3B00]">
+              VECTORS: ${pgState.showVectors ? 'ON' : 'OFF'}
+            </button>
+          `;
+          document.getElementById('pg-rng-conf').addEventListener('input', (e) => {
+            pgState.confThreshold = parseFloat(e.target.value);
+            document.getElementById('pg-conf-val').textContent = pgState.confThreshold.toFixed(2);
+          });
+          document.getElementById('pg-btn-vec').addEventListener('click', (e) => {
+            pgState.showVectors = !pgState.showVectors;
+            e.target.textContent = `VECTORS: ${pgState.showVectors ? 'ON' : 'OFF'}`;
+          });
+        } else if (idx === 2) {
+          pgControls.innerHTML = ['calm', 'focused', 'curious', 'restore']
+            .map((m) => `
+              <button type="button" data-mood="${m}" class="pg-mood-btn border px-2.5 py-1 ${pgState.mood === m ? 'border-[#FF3B00] bg-[#FF3B00] text-white' : 'border-white/20 text-[#F0EDE6]/80'}">
+                ${m.toUpperCase()}
+              </button>
+            `)
+            .join('');
+          pgControls.querySelectorAll('.pg-mood-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              pgState.mood = btn.dataset.mood;
+              buildPlaygroundControls(2);
+            });
+          });
+        } else {
+          pgControls.innerHTML = `
+            <label class="flex items-center gap-2 text-[#F0EDE6]/80">
+              TEMP
+              <input id="pg-rng-temp" type="range" min="0.25" max="1.2" step="0.05" value="${pgState.temperature}" class="studio-range w-24" />
+            </label>
+            <button type="button" id="pg-btn-perturb" class="border border-[#FF3B00] bg-[#FF3B00] text-white px-3 py-1">
+              PERTURB FIELD
+            </button>
+          `;
+          document.getElementById('pg-rng-temp').addEventListener('input', (e) => {
+            pgState.temperature = parseFloat(e.target.value);
+          });
+          document.getElementById('pg-btn-perturb').addEventListener('click', () => {
+            pgState.perturbForce = 1.0;
+          });
+        }
+      }
+
+      pgCanvas.addEventListener('mousemove', (e) => {
+        const rect = pgCanvas.getBoundingClientRect();
+        pgState.localMouseX = e.clientX - rect.left;
+        pgState.localMouseY = e.clientY - rect.top;
+      });
+      pgCanvas.addEventListener('mouseleave', () => {
+        pgState.localMouseX = -999;
+        pgState.localMouseY = -999;
+      });
+
+      function openCaseStudy(idx) {
+        openProjectIdx = idx;
+        const p = PROJECTS[idx];
+
+        document.getElementById('cs-index').textContent = p.index;
+        document.getElementById('cs-title').textContent = p.title;
+        document.getElementById('cs-role').textContent = p.role;
+        document.getElementById('cs-domain').textContent = p.domain;
+        document.getElementById('cs-stack').textContent = p.stack;
+        document.getElementById('cs-year').textContent = p.year;
+        document.getElementById('cs-context').textContent = p.context;
+        document.getElementById('cs-craft').textContent = p.craft;
+        document.getElementById('cs-impact').textContent = p.impact;
+        document.getElementById('pg-title').textContent = p.pgTitle;
+
+        buildPlaygroundControls(idx);
+
+        // Hide hover stage if open
+        activeHoverProject = -1;
+        previewStage.classList.remove('is-visible');
+        cursorRing.classList.remove('is-pill');
+        cursorLabel.textContent = '';
+        cursorDot.style.opacity = '1';
+
+        caseTakeover.classList.add('is-open');
+        caseTakeover.setAttribute('aria-hidden', 'false');
+        caseTakeover.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(resizePlaygroundCanvas, 60);
+      }
+
+      function closeCaseStudy() {
+        caseTakeover.classList.remove('is-open');
+        caseTakeover.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => { openProjectIdx = -1; }, 450);
+      }
+
+      document.getElementById('cs-close').addEventListener('click', closeCaseStudy);
+      document.getElementById('cs-prev').addEventListener('click', () => {
+        openCaseStudy((openProjectIdx - 1 + PROJECTS.length) % PROJECTS.length);
+      });
+      document.getElementById('cs-next').addEventListener('click', () => {
+        openCaseStudy((openProjectIdx + 1) % PROJECTS.length);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && openProjectIdx >= 0) closeCaseStudy();
+      });
+
+      /* -----------------------------------------------------------------------
+         11. THREE PILLARS ACCORDION
+         ----------------------------------------------------------------------- */
+      document.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const item = trigger.closest('.accordion-item');
+          const wasOpen = item.classList.contains('is-open');
+          document.querySelectorAll('.accordion-item').forEach((el) => el.classList.remove('is-open'));
+          if (!wasOpen) item.classList.add('is-open');
+        });
+      });
+
+      /* -----------------------------------------------------------------------
+         12. FOOTER CONTACT, EMAIL COPY & TOAST
+         ----------------------------------------------------------------------- */
+      let toastTimer = null;
+      window.showToast = function (msg) {
+        const toast = document.getElementById('mono-toast');
+        toast.textContent = msg;
+        toast.classList.add('is-shown');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('is-shown'), 2400);
+      };
+
+      window.copyEmail = function () {
+        const email = 'angel.macwan@proton.me';
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = email;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast(`COPIED: ${email.toUpperCase()}`);
+        } catch (err) {
+          showToast(email.toUpperCase());
+        }
+      };
+
+      document.getElementById('footer-email-cta').addEventListener('click', window.copyEmail);
+      document.getElementById('btn-back-top').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* -----------------------------------------------------------------------
+         13. UNIFIED 60FPS ANIMATION LOOP
+         ----------------------------------------------------------------------- */
+      function animate(t) {
+        // 1. Custom Magnetic Cursor Lerp
+        if (!isTouchDevice) {
+          cursorDot.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+          ringPos.x += (mouse.x - ringPos.x) * 0.16;
+          ringPos.y += (mouse.y - ringPos.y) * 0.16;
+          cursorRing.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0)`;
+        }
+
+        // 2. Velocity-Reactive Marquee
+        updateMarquee();
+
+        // 3. Living Generative Hero Canvas (pause when takeover covers screen)
+        if (openProjectIdx < 0 && window.scrollY < heroH + 200) {
+          drawHeroCanvas(t);
+        }
+
+        // 4. Floating Cursor-Tracked Live Preview Stage
+        if (activeHoverProject >= 0 && !isTouchDevice) {
+          const targetX = Math.min(window.innerWidth - 380, Math.max(20, mouse.x + 28));
+          const targetY = Math.min(window.innerHeight - 250, Math.max(70, mouse.y - 115));
+          stagePos.x += (targetX - stagePos.x) * 0.14;
+          stagePos.y += (targetY - stagePos.y) * 0.14;
+
+          const targetRotZ = Math.max(-7, Math.min(7, mouse.vx * 0.28));
+          const targetRotY = Math.max(-14, Math.min(14, mouse.vx * 0.45));
+          stagePos.rotZ += (targetRotZ - stagePos.rotZ) * 0.12;
+          stagePos.rotY += (targetRotY - stagePos.rotY) * 0.12;
+
+          previewStage.style.transform = `translate3d(${stagePos.x}px, ${stagePos.y}px, 0) perspective(900px) rotateY(${stagePos.rotY}deg) rotateZ(${stagePos.rotZ}deg)`;
+          renderProjectVisual(previewCtx, 360, 230, activeHoverProject, t, false);
+        }
+
+        // 5. Case Study Interactive Playground Canvas
+        if (openProjectIdx >= 0 && pgW > 0 && pgH > 0) {
+          renderProjectVisual(pgCtx, pgW, pgH, openProjectIdx, t, true);
+
+          // Live telemetry footer readout
+          if (openProjectIdx === 0) {
+            pgTelemetry.innerHTML = `<span>CADENCE: ${pgState.cadence.toFixed(1)}X</span><span>BURST QUEUE: ${pgState.burstPackets.length} PKTS</span>`;
+          } else if (openProjectIdx === 1) {
+            const iou = (0.94 - Math.abs(pgState.confThreshold - 0.62) * 0.35).toFixed(2);
+            pgTelemetry.innerHTML = `<span>SEGFORMER THRESHOLD: ${pgState.confThreshold.toFixed(2)}</span><span>EST. IOU: ${iou}</span>`;
+          } else if (openProjectIdx === 2) {
+            pgTelemetry.innerHTML = `<span>STATE: ${MOOD_PALETTES[pgState.mood].label}</span><span>60FPS GENERATIVE ORB</span>`;
+          } else {
+            pgTelemetry.innerHTML = `<span>TEMPERATURE: ${pgState.temperature.toFixed(2)}</span><span>MOVE CURSOR ACROSS GRID</span>`;
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      /* -----------------------------------------------------------------------
+         14. INITIALIZATION ON WINDOW LOAD
+         ----------------------------------------------------------------------- */
+      window.addEventListener('resize', () => {
+        resizeHeroCanvas();
+        resizePlaygroundCanvas();
+      });
+
+      window.onload = function () {
+        resizeHeroCanvas();
+        initPreviewCanvas();
+        setupMagneticElements();
+        runPreloader();
+        requestAnimationFrame(animate);
+      };
+    })();
+  </script>
+</body>
+</html>

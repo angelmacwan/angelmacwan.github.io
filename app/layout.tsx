@@ -1,43 +1,41 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import TargetCursor from '@/components/ui/target-cursor';
-
-const geistSans = Geist({
-	variable: '--font-geist-sans',
-	subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
-	subsets: ['latin'],
-});
+import { FilmGrain } from '@/components/kinetic/film-grain';
+import { MagneticCursor } from '@/components/kinetic/magnetic-cursor';
 
 export const metadata: Metadata = {
-	title: 'Angel Macwan Data Scientist',
-	description:
-		'Portfolio of Angel Macwan - Data Scientist and Data Engineer at IBM specializing in Deep Learning, NLP, and AI Automation',
+  title: 'Angel Macwan — Data Systems, Biological AI & Agentic Architectures',
+  description:
+    'Data Engineer at IBM architecting enterprise data pipelines, AI & Computational Biology researcher (pending publication) in ocular morphometrics and biomedical NLP, and independent creator of Thallus, Pluto, and PrivateRAG.',
+  keywords: [
+    'Angel Macwan',
+    'Data Engineer',
+    'IBM',
+    'Computational Biology',
+    'Meibomian Gland',
+    'Ocular Morphometrics',
+    'Biomedical NLP',
+    'Disease Gene Association',
+    'Snowflake',
+    'Databricks',
+    'Thallus',
+    'Pluto',
+    'PrivateRAG'
+  ]
 };
 
 export default function RootLayout({
-	children,
+  children
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
-				<TargetCursor
-					targetSelector='a, button, input[type="submit"], input[type="button"], .clickable, .cursor-target'
-					spinDuration={2}
-					hoverDuration={0.2}
-					hideDefaultCursor={true}
-					parallaxOn={true}
-				/>
-				{children}
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en" data-mode="dark">
+      <body className="antialiased selection:bg-[#FF3B00] selection:text-white">
+        <FilmGrain />
+        <MagneticCursor />
+        {children}
+      </body>
+    </html>
+  );
 }
